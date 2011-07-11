@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_one :work_location, :as => :registrant, :dependent => :destroy
   has_one :preference, :as => :registrant, :dependent => :destroy
   has_one :pay, :as => :registrant, :dependent => :destroy
-  has_one :data, :as => :registrant, :dependent => :destroy
+  has_one :credential, :as => :registrant, :dependent => :destroy
   has_many :assets, :dependent => :destroy
 
   has_one :basic_data, :as => :client, :dependent => :destroy

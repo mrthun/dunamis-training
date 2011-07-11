@@ -1,6 +1,6 @@
-class CreateData < ActiveRecord::Migration
+class CreateCredentials< ActiveRecord::Migration
   def self.up
-    create_table :data do |t|
+    create_table :credentials do |t|
       t.column :registrant_id, :integer
       t.column :registrant_type, :string
       t.column :license_expiration_date, :datetime
@@ -15,6 +15,6 @@ class CreateData < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :data
+    drop_table :credential
   end
 end

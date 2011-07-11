@@ -44,12 +44,13 @@ puts "Creating default statuses...."
 end
 
 puts "Creating default admin user...."
-user = User.new(:email => "admin@admin.com",
+user = User.new(:email => "admin@dunamis.com",
   :password => "123456",
   :password_confirmation => "123456",
-  :status => Status.find_by_title("active")
+  :status_id => Status.find_by_title("active").id
 )
 user.roles << Role.find_by_title("admin")
+user.skip_activation = true
 user.save!
 user.activate!
 

@@ -65,7 +65,7 @@ end
 
 puts "Creating default pay types...."
 %w(bank_transfer check cash credit_card).each do |title|
-  ContractType.create!(:title => title)
+  PayType.create!(:title => title)
 end
 
 puts "Creating default client types...."

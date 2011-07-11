@@ -1,4 +1,13 @@
 Training::Application.configure do
+  ActionMailer::Base.smtp_settings              = {
+    :address              => "smtp.gmail.com",
+    :port                 => "587",
+    :domain               => "gmail.com",
+    :enable_starttls_auto => true,
+    :authentication       => :login,
+    :user_name            => "test.account.rac@gmail.com",
+    :password             => "racpakistan22"
+  }
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -22,5 +31,6 @@ Training::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
 

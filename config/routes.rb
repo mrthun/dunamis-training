@@ -72,3 +72,28 @@ Training::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+#== Route Map
+# Generated on 11 Jul 2011 20:01
+#
+#             POST   /users(.:format)                     {:action=>"create", :controller=>"users"}
+#    new_user GET    /users/new(.:format)                 {:action=>"new", :controller=>"users"}
+#   edit_user GET    /users/:id/edit(.:format)            {:action=>"edit", :controller=>"users"}
+#        user GET    /users/:id(.:format)                 {:action=>"show", :controller=>"users"}
+#             PUT    /users/:id(.:format)                 {:action=>"update", :controller=>"users"}
+#             DELETE /users/:id(.:format)                 {:action=>"destroy", :controller=>"users"}
+#     session POST   /session(.:format)                   {:action=>"create", :controller=>"sessions"}
+# new_session GET    /session/new(.:format)               {:action=>"new", :controller=>"sessions"}
+#             DELETE /session(.:format)                   {:action=>"destroy", :controller=>"sessions"}
+#      signup        /signup(.:format)                    {:action=>"new", :controller=>"users"}
+#    register        /register(.:format)                  {:action=>"create", :controller=>"users"}
+#       login        /login(.:format)                     {:action=>"new", :controller=>"sessions"}
+#      logout        /logout(.:format)                    {:action=>"destroy", :controller=>"sessions"}
+#    activate        /activate/:activation_code(.:format) {:action=>"activate", :activation_code=>nil, :controller=>"users"}
+#  home_index GET    /home(.:format)                      {:action=>"index", :controller=>"home"}
+#             POST   /home(.:format)                      {:action=>"create", :controller=>"home"}
+#    new_home GET    /home/new(.:format)                  {:action=>"new", :controller=>"home"}
+#   edit_home GET    /home/:id/edit(.:format)             {:action=>"edit", :controller=>"home"}
+#        home GET    /home/:id(.:format)                  {:action=>"show", :controller=>"home"}
+#             PUT    /home/:id(.:format)                  {:action=>"update", :controller=>"home"}
+#             DELETE /home/:id(.:format)                  {:action=>"destroy", :controller=>"home"}
+#        root        /(.:format)                          {:action=>"index", :controller=>"home"}

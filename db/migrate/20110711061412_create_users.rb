@@ -1,6 +1,7 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table "users" do |t|
+      t.column :name,                     :string, :limit => 100
       t.column :email,                     :string, :limit => 100
       t.column :crypted_password,          :string, :limit => 40
       t.column :salt,                      :string, :limit => 40
@@ -11,7 +12,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.column :activation_code,           :string, :limit => 40
       t.column :activated_at,              :datetime
-      t.column :status_id,                      :integer
+      t.column :status_id,                 :integer
+      t.column :organization_id,           :integer
 
     end
 

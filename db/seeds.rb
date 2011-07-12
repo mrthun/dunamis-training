@@ -34,7 +34,7 @@ client_types = ClientType.all
 client_types.each{ |type| type.destroy } unless client_types.blank?
 
 puts "Creating default user roles...."
-%w(admin organization registerant scheduler client).each do |title|
+%w(admin organization registrant scheduler client).each do |title|
   Role.create!(:title => title)
 end
 

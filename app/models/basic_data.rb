@@ -1,5 +1,5 @@
 class BasicData < ActiveRecord::Base
-  belongs_to :client
+  belongs_to :client, :class_name => "User", :foreign_key => 'client_id'
   belongs_to :client_type
 end
 

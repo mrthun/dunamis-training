@@ -1,19 +1,29 @@
 Training::Application.routes.draw do
-  resources :users
-
-  resource :session, :only => [:new, :create, :destroy]
 
   match 'signup' => 'users#new', :as => :signup
-
   match 'register' => 'users#create', :as => :register
-
   match 'login' => 'sessions#new', :as => :login
-
   match 'logout' => 'sessions#destroy', :as => :logout
-
   match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
 
+  match '/' => 'home#index', :constraints => { :subdomain => "" }
+ 
+  constraints(Subdomain) do
+    match '/' => 'organizations#dashboard'
+  end
+
+  resources :users do
+    collection do
+      get 'new_employee'
+      post 'create_employee'
+    end
+  end
+
+  resource :session, :only => [:new, :create, :destroy]
   resources :home
+  resource :organizations
+
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -73,27 +83,37 @@ Training::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
 end
 #== Route Map
-# Generated on 11 Jul 2011 20:01
+# Generated on 12 Jul 2011 17:57
 #
-#             POST   /users(.:format)                     {:action=>"create", :controller=>"users"}
-#    new_user GET    /users/new(.:format)                 {:action=>"new", :controller=>"users"}
-#   edit_user GET    /users/:id/edit(.:format)            {:action=>"edit", :controller=>"users"}
-#        user GET    /users/:id(.:format)                 {:action=>"show", :controller=>"users"}
-#             PUT    /users/:id(.:format)                 {:action=>"update", :controller=>"users"}
-#             DELETE /users/:id(.:format)                 {:action=>"destroy", :controller=>"users"}
-#     session POST   /session(.:format)                   {:action=>"create", :controller=>"sessions"}
-# new_session GET    /session/new(.:format)               {:action=>"new", :controller=>"sessions"}
-#             DELETE /session(.:format)                   {:action=>"destroy", :controller=>"sessions"}
-#      signup        /signup(.:format)                    {:action=>"new", :controller=>"users"}
-#    register        /register(.:format)                  {:action=>"create", :controller=>"users"}
-#       login        /login(.:format)                     {:action=>"new", :controller=>"sessions"}
-#      logout        /logout(.:format)                    {:action=>"destroy", :controller=>"sessions"}
-#    activate        /activate/:activation_code(.:format) {:action=>"activate", :activation_code=>nil, :controller=>"users"}
-#  home_index GET    /home(.:format)                      {:action=>"index", :controller=>"home"}
-#             POST   /home(.:format)                      {:action=>"create", :controller=>"home"}
-#    new_home GET    /home/new(.:format)                  {:action=>"new", :controller=>"home"}
-#   edit_home GET    /home/:id/edit(.:format)             {:action=>"edit", :controller=>"home"}
-#        home GET    /home/:id(.:format)                  {:action=>"show", :controller=>"home"}
-#             PUT    /home/:id(.:format)                  {:action=>"update", :controller=>"home"}
-#             DELETE /home/:id(.:format)                  {:action=>"destroy", :controller=>"home"}
-#        root        /(.:format)                          {:action=>"index", :controller=>"home"}
+#              register        /register(.:format)                  {:controller=>"users", :action=>"create"}
+#                 login        /login(.:format)                     {:controller=>"sessions", :action=>"new"}
+#                logout        /logout(.:format)                    {:controller=>"sessions", :action=>"destroy"}
+#              activate        /activate/:activation_code(.:format) {:controller=>"users", :action=>"activate", :activation_code=>nil}
+#                              /(.:format)                          {:controller=>"home", :subdomain=>"www", :action=>"index"}
+#                              /(.:format)                          {:controller=>"organizations", :subdomain=>/.+/, :action=>"dashboard"}
+#    new_employee_users GET    /users/new_employee(.:format)        {:controller=>"users", :action=>"new_employee"}
+# create_employee_users POST   /users/create_employee(.:format)     {:controller=>"users", :action=>"create_employee"}
+#                 users GET    /users(.:format)                     {:controller=>"users", :action=>"index"}
+#                       POST   /users(.:format)                     {:controller=>"users", :action=>"create"}
+#              new_user GET    /users/new(.:format)                 {:controller=>"users", :action=>"new"}
+#             edit_user GET    /users/:id/edit(.:format)            {:controller=>"users", :action=>"edit"}
+#                  user GET    /users/:id(.:format)                 {:controller=>"users", :action=>"show"}
+#                       PUT    /users/:id(.:format)                 {:controller=>"users", :action=>"update"}
+#                       DELETE /users/:id(.:format)                 {:controller=>"users", :action=>"destroy"}
+#               session POST   /session(.:format)                   {:controller=>"sessions", :action=>"create"}
+#           new_session GET    /session/new(.:format)               {:controller=>"sessions", :action=>"new"}
+#                       DELETE /session(.:format)                   {:controller=>"sessions", :action=>"destroy"}
+#            home_index GET    /home(.:format)                      {:controller=>"home", :action=>"index"}
+#                       POST   /home(.:format)                      {:controller=>"home", :action=>"create"}
+#              new_home GET    /home/new(.:format)                  {:controller=>"home", :action=>"new"}
+#             edit_home GET    /home/:id/edit(.:format)             {:controller=>"home", :action=>"edit"}
+#                  home GET    /home/:id(.:format)                  {:controller=>"home", :action=>"show"}
+#                       PUT    /home/:id(.:format)                  {:controller=>"home", :action=>"update"}
+#                       DELETE /home/:id(.:format)                  {:controller=>"home", :action=>"destroy"}
+#         organizations POST   /organizations(.:format)             {:controller=>"organizations", :action=>"create"}
+#     new_organizations GET    /organizations/new(.:format)         {:controller=>"organizations", :action=>"new"}
+#    edit_organizations GET    /organizations/edit(.:format)        {:controller=>"organizations", :action=>"edit"}
+#                       GET    /organizations(.:format)             {:controller=>"organizations", :action=>"show"}
+#                       PUT    /organizations(.:format)             {:controller=>"organizations", :action=>"update"}
+#                       DELETE /organizations(.:format)             {:controller=>"organizations", :action=>"destroy"}
+#                  root        /(.:format)                          {:controller=>"home", :action=>"index"}

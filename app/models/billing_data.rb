@@ -1,5 +1,5 @@
 class BillingData < ActiveRecord::Base
-  belongs_to :client
+  belongs_to :client, :class_name => "User", :foreign_key => 'client_id'
   belongs_to :pay_type
 end
 

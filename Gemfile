@@ -8,6 +8,7 @@ gem 'rails', '3.0.7'
 gem 'mysql'
 gem 'jquery-rails'
 gem 'annotate'
+gem 'friendly_id'
 
 # Use unicorn as the web server
 # gem 'unicorn'

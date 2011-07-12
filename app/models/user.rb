@@ -13,17 +13,18 @@ class User < ActiveRecord::Base
   #                    :length     => { :within => 3..40 },
   #                    :format     => { :with => Authentication.login_regex, :message => Authentication.bad_login_message }
   #
-  #  validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
-  #                    :length     => { :maximum => 100 },
-  #                    :allow_nil  => true
+  validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
+    :length     => { :maximum => 100 },
+    :allow_nil  => true
 
   validates :email, :presence   => true,
     :uniqueness => true,
     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
     :length     => { :within => 6..100 }
 
-  before_create :make_activation_code 
+  before_create :make_activation_code
 
+  has_one :subdomain, :dependent => :destroy
   has_and_belongs_to_many :roles
   has_one :personal_data, :as => :registrant, :dependent => :destroy
   has_one :skill, :as => :registrant, :dependent => :destroy
@@ -37,13 +38,15 @@ class User < ActiveRecord::Base
   has_one :address, :as => :client, :dependent => :destroy
   has_one :billing_data, :as => :client, :dependent => :destroy
   has_many :client_locations, :as => :client, :dependent => :destroy
+  has_many :employees, :as => :organization, :class_name => "User", :dependent => :destroy
 
   belongs_to :status
+  belongs_to :organization, :class_name => "User", :foreign_key => 'organization_id'
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email,:password, :password_confirmation, :status_id
+  attr_accessible :name, :email,:password, :password_confirmation, :status_id, :organization_id
 
   attr_accessor_with_default :skip_activation, false
 
@@ -52,6 +55,7 @@ class User < ActiveRecord::Base
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
+    self.status_id = Status.find_by_title("active").id
     save(:validate => false)
   end
 
@@ -85,6 +89,27 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+  def is_admin?
+    roles.include?("admin")
+  end
+
+  def is_organization?
+    roles.include?("organization")
+  end
+
+  def is_registrant?
+    roles.include?("registrant")
+  end
+
+  def is_scheduler?
+    roles.include?("scheduler")
+  end
+
+  def is_client?
+    roles.include?("client")
+  end
+  
+
   protected
     
 
@@ -96,11 +121,13 @@ class User < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: users
 #
 #  id                        :integer(4)      not null, primary key
+#  name                      :string(100)
 #  email                     :string(100)
 #  crypted_password          :string(40)
 #  salt                      :string(40)

@@ -108,11 +108,13 @@ protected
   end
 end
 
+
 # == Schema Information
 #
 # Table name: users
 #
 #  id                        :integer(4)      not null, primary key
+#  name                      :string(100)
 #  email                     :string(100)
 #  crypted_password          :string(40)
 #  salt                      :string(40)

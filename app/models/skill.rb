@@ -1,5 +1,5 @@
 class Skill < ActiveRecord::Base
-  belongs_to :registrant
+  belongs_to :registrant, :class_name => "User", :foreign_key => 'registrant_id'
   belongs_to :occupation_type
 end
 

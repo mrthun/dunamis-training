@@ -9,7 +9,8 @@ class UserMailer < ActionMailer::Base
   def activation(user)
     setup_email(user)
     @subject    += 'Your account has been activated!'
-    @url  = "http://#{@user.subdomain.name}.#{@host}/"
+    subdomian = @user.is_organization? ? @user.subdomain.name : @user.organization.subdomain.name
+    @url  = "http://#{subdomian}.#{@host}/"
   end
   
   protected

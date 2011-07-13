@@ -1,7 +1,7 @@
 <h1><%= link_to "DUNAMIS TRAINING", root_url(:subdomain => false ) %></h1>
 <% subdomain = is_subdomian?(request.subdomain) ? request.subdomain : false %>
 <% if logged_in? %>
-  <%= link_to "Add New Employee", new_employee_users_path(:subdomain => subdomain) if is_subdomian?(request.subdomain) %>
+  <%= link_to "Add New Employee", new_employee_users_path(:subdomain => subdomain) if (is_subdomian?(request.subdomain) && current_user.is_organization?) %>
   <%= link_to "Sign Out", logout_path(:subdomain => subdomain) %>
 <%else%>
   <%= link_to "Sign In", login_path(:subdomain => subdomain) %>

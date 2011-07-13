@@ -1,7 +1,7 @@
 <h1>Create A New Employee</h1>
 <%= error_messages_for :user %>
 <%= form_for :user, :url => create_employee_users_path do |f| -%>
-
+  <%= f.hidden_field :organization_id, :value => current_user.id %>
   <p><%= label_tag 'email' %><br/>
     <%= f.text_field :email %></p>
 

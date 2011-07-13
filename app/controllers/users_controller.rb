@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
+    @user.roles << Role.find_by_title("organization")
     @user.subdomain = Subdomain.new :name => params[:user][:name].downcase
 
     success = @user && @user.save
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 
   def create_employee
     @user = User.new(params[:user])
-
+    @user.roles << Role.find_by_id(params[:role_id])
     success = @user && @user.save
 
     if success && @user.errors.empty?

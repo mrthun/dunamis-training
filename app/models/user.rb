@@ -90,23 +90,23 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    roles.include?("admin")
+    roles.include? Role.find_by_title "admin"
   end
 
   def is_organization?
-    roles.include?("organization")
+    roles.include? Role.find_by_title "organization"
   end
 
   def is_registrant?
-    roles.include?("registrant")
+    roles.include? Role.find_by_title "registrant"
   end
 
   def is_scheduler?
-    roles.include?("scheduler")
+    roles.include? Role.find_by_title "scheduler"
   end
 
   def is_client?
-    roles.include?("client")
+    roles.include? Role.find_by_title "client"
   end
   
 

@@ -24,7 +24,7 @@ Training::Application.routes.draw do
   resource :organizations
   resource :profiles do
     collection do
-      get "personal_data","skills","preferences","pays","credentials","locations"
+      get "my_profile"
     end
   end
 

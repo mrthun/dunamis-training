@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
-    @user.subdomain = Subdomain.create! :name => params[:user][:name].downcase
+    @user.subdomain = Subdomain.new :name => params[:user][:name].downcase
 
     success = @user && @user.save
 

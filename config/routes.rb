@@ -8,7 +8,7 @@ Training::Application.routes.draw do
 
   match '/' => 'home#index', :constraints => { :subdomain => "" }
  
-  constraints(Subdomain) do
+  constraints(Subdomains) do
     match '/' => 'organizations#dashboard'
   end
 

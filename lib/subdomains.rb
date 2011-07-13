@@ -1,4 +1,4 @@
-class Subdomain
+class Subdomains
   def self.matches?(request)
     request.subdomain.present? && request.subdomain != "www"
   end

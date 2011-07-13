@@ -2,6 +2,7 @@ class CreatePays < ActiveRecord::Migration
   def self.up
     create_table :pays do |t|
       t.column :registrant_id, :integer
+      t.column :registrant_type, :string
       t.column :regular_hours_from, :datetime
       t.column :regular_hours_to, :datetime
       t.column :overtime_hours_from, :datetime

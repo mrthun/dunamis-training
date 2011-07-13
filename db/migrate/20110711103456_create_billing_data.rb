@@ -2,6 +2,7 @@ class CreateBillingData < ActiveRecord::Migration
   def self.up
     create_table :billing_data do |t|
       t.column :client_id, :integer
+      t.column :client_type, :string
       t.column :preferred_bill_in, :string
       t.column :pay_term, :string
       t.column :week_start, :string

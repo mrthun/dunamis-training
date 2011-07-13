@@ -2,6 +2,7 @@ class CreatePersonalData < ActiveRecord::Migration
   def self.up
     create_table :personal_data do |t|
       t.column :registrant_id, :integer
+      t.column :registrant_type, :string
       t.column :first_name, :string
       t.column :last_name, :string
       t.column :birth_date, :datetime

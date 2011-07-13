@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     case
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
-      redirect_to '/login', :notice => "Signup complete! Please sign in to continue."
+      redirect_to '/', :notice => "Signup complete! Please sign in to continue."
     when params[:activation_code].blank?
       redirect_back_or_default('/', :flash => { :error => "The activation code was missing.  Please follow the URL from your email." })
     else 

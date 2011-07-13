@@ -2,6 +2,7 @@ class CreateAddresses < ActiveRecord::Migration
   def self.up
     create_table :addresses do |t|
       t.column :client_id, :integer
+      t.column :client_type, :string
       t.column :billing_contact_name, :string
       t.column :billing_address_1, :text
       t.column :billing_address_2, :text

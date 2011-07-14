@@ -25,6 +25,7 @@ Training::Application.routes.draw do
   resource :profiles do
     collection do
       get "my_profile"
+      post "create_personal_data","create_skill","create_preference","create_pay","create_location","create_credential","upload_asset"
     end
   end
 

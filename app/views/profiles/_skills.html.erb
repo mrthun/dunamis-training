@@ -1,1 +1,28 @@
+<h1>Upload Driving License</h1>
+<div id="license"></div>
+<% form_for :asset , :url => { :controller => "profiles", :action => "upload_asset", :key => "driving_license" }, :html => {:id =>"licenseForm", :multipart => true }  do |r| %>
+  <%=  r.file_field :asset  %><br /><br />
+<% end %>
+
 <h1>Skills</h1>
+<%= error_messages_for :resource %>
+<% form_for :resource,@resource, :url => create_skill_profiles_path, :html=>{:id => "profileForm"} do |s| %>
+  Occupation: <%= select_tag "resource[occupation_type_id]", options_from_collection_for_select(OccupationType.all, :id, :title, @resource.occupation_type_id ) %><br /><br />
+  <%= submit_tag "Submit", :class=>"profle_submit" %><br /><br />
+<%end%>
+
+<script type="text/javascript">
+  $('#asset_asset').change(function(){
+    $('#licenseForm').ajaxSubmit({
+      beforeSubmit: function(a,f,o) {
+        o.dataType = 'json';
+      },
+      complete: function(XMLHttpRequest, textStatus) {
+        var regex = /(<([^>]+)>)/ig;
+        var body = XMLHttpRequest.responseText;
+        var result = body.replace(regex, "");
+        $('#license').html(result);
+      }
+    });
+  });
+</script>

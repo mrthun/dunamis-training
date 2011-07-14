@@ -1,1 +1,41 @@
+<h1>Upload Resume</h1>
+<div id="resume"></div>
+<% form_for :asset , :url => { :controller => "profiles", :action => "upload_asset", :key => "resume" }, :html => {:id =>"resumeForm", :multipart => true }  do |r| %>
+  <%=  r.file_field :asset  %><br /><br />
+<% end %>
+
 <h1>Personal Data</h1>
+<%= error_messages_for :resource %>
+<% form_for :resource,@resource, :url => create_personal_data_profiles_path, :html=>{:id => "profileForm"} do |pd| %>
+  First Name: <%= pd.text_field :first_name %><br /><br />
+  Last Name: <%= pd.text_field :last_name %><br /><br />
+  Birth Date: <%= pd.date_select :birth_date %><br /><br />
+  Home Address 1: <%= pd.text_field :home_address_1 %><br /><br />
+  Home Address 2: <%= pd.text_field :home_address_2 %><br /><br />
+  City: <%= pd.text_field :city %><br /><br />
+  Zip: <%= pd.text_field :zip %><br /><br />
+  Home Phone: <%= pd.text_field :home_phone %><br /><br />
+  Cell Phone: <%= pd.text_field :cell_phone %><br /><br />
+  Hire Date: <%= pd.date_select :hire_date %><br /><br />
+  Social Security Number: <%= pd.text_field :social_security_number %><br /><br />
+  Bank: <%= pd.text_field :bank %><br /><br />
+  Account Number: <%= pd.text_field :account_number %><br /><br />
+  Routing Number: <%= pd.text_field :routing_number %><br /><br />
+  <%= submit_tag "Submit", :class=>"profle_submit" %><br /><br />
+<%end%>
+
+<script type="text/javascript">
+  $('#asset_asset').change(function(){
+    $('#resumeForm').ajaxSubmit({
+      beforeSubmit: function(a,f,o) {
+        o.dataType = 'json';
+      },
+      complete: function(XMLHttpRequest, textStatus) {
+        var regex = /(<([^>]+)>)/ig;
+        var body = XMLHttpRequest.responseText;
+        var result = body.replace(regex, "");
+        $('#resume').html(result);
+      }
+    });
+  });
+</script>

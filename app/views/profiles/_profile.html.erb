@@ -1,0 +1,43 @@
+<p id="links">
+  <%= render :partial => "/profiles/profile_links.html" %>
+</p>
+<% case @resource.class.name %>
+<% when "PersonalData" %>
+  <%= render :partial => "/profiles/personal_data.html" %>
+<% when "Skill" %>
+  <%= render :partial => "/profiles/skills.html" %>
+<% when "Preference" %>
+  <%= render :partial => "/profiles/preferences.html" %>
+<% when "Pay" %>
+  <%= render :partial => "/profiles/pays.html" %>
+<% when "Credential" %>
+  <%= render :partial => "/profiles/credentials.html" %>
+<% when "WorkLocation" %>
+  <%= render :partial => "/profiles/locations.html" %>
+<%end%>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".profile_links").click(function(){
+      $.ajax({
+        url: $(this).attr("href"),
+        type: 'GET',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $("#profile").html(response.html);
+        }
+      });
+      return false;
+    });
+
+    $(".profle_submit").click(function(){
+      $.post($("form#profileForm").attr("action"), $("form#profileForm").serialize(), function(response){
+        if(response.success){
+          $("#profile").html(response.html);
+        }
+      }, "json");
+      return false;
+    });
+  });
+</script>

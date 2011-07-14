@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
+  before_filter :login_required, :only => [:new_employee, :create_employee]
+  access_control [:new_employee,:create_employee]  => 'organization'
 
   # render new.rhtml
   def new

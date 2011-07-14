@@ -14,5 +14,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_url(:subdomain => false)
     end
   end
+  protected
+
+  def permission_denied
+    flash[:notice] = "You don't have privileges to access this action"
+    return render :template => '/shared/403'
+  end
     
 end

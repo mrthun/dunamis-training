@@ -18,6 +18,8 @@
       <%= link_to "Add New Employee", new_employee_users_path(:subdomain => subdomain) %> |
     <% elsif  current_user.is_registrant? %>
       <%= link_to "My Profile", my_profile_profiles_path(:subdomain => subdomain) %> |
+    <% elsif  current_user.is_scheduler? %>
+      <%= link_to "Manage Clients",list_clients_path(:subdomain => subdomain) %> |
     <%end%>
   <%end%>
   <%= link_to "Sign Out", logout_path(:subdomain => subdomain) %>

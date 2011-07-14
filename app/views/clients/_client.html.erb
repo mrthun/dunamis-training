@@ -1,0 +1,39 @@
+<p id="links">
+  <%= render :partial => "/clients/client_links.html" %>
+</p>
+<% case @resource.class.name %>
+<% when "BasicData" %>
+  <%= render :partial => "/clients/basic_data.html" %>
+<% when "Address" %>
+  <%= render :partial => "/clients/addresses.html" %>
+<% when "BillingData" %>
+  <%= render :partial => "/clients/billing.html" %>
+<% when "ClientLocation" %>
+  <%= render :partial => "/clients/locations.html" %>
+<%end%>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".client_links").click(function(){
+      $.ajax({
+        url: $(this).attr("href"),
+        type: 'GET',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $("#client").html(response.html);
+        }
+      });
+      return false;
+    });
+
+    $(".client_submit").click(function(){
+      $.post($("form#clientForm").attr("action"), $("form#clientForm").serialize(), function(response){
+        if(response.success){
+          $("#client").html(response.html);
+        }
+      }, "json");
+      return false;
+    });
+  });
+</script>

@@ -1,0 +1,16 @@
+<br /><%= link_to "Create New Client", new_clients_path %>
+<h1>All Clients List</h1> 
+<% unless @clients.blank? %>
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.email %></td>
+        <td><%= link_to "Modify Details", {:action =>:show, :c_id => client.id} %></td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>

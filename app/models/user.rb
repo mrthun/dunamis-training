@@ -118,6 +118,10 @@ class User < ActiveRecord::Base
     resume.destroy
   end
 
+  def self.employees
+    all.select{ |user| user.is_registrant? || user.is_scheduler? }
+  end
+  
   def self.clients
     all.select{ |user| user.is_client? }
   end

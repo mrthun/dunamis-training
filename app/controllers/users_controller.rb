@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def list_employees
+    @employees = User.employees
+  end
+
   def new_employee
     @user = User.new
     @roles = Role.all.select{ |role| role.title == "scheduler" || role.title == "registrant" }
@@ -48,6 +52,7 @@ class UsersController < ApplicationController
   def create_employee
     @user = User.new(params[:user])
     @user.roles << Role.find_by_id(params[:role_id])
+    puts "dddddddddddddddddd",params[:user][:organization_type]
     success = @user && @user.save
 
     if success && @user.errors.empty?
@@ -56,6 +61,12 @@ class UsersController < ApplicationController
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'
     end
+  end
+
+  def delete_employee
+    @employee = User.find_by_id(params[:id])
+    @employee.destroy
+    redirect_to :action => :list_employees
   end
 
 

@@ -14,7 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :activated_at,              :datetime
       t.column :status_id,                 :integer
       t.column :organization_id,           :integer
-
+      t.column :organization_type,           :string
     end
 
     add_index :users, :email, :unique => true

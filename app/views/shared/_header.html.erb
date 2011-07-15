@@ -15,7 +15,7 @@
 <% if logged_in? %>
   <% if is_subdomian?(request.subdomain) %>
     <% if  current_user.is_organization? %>
-      <%= link_to "Add New Employee", new_employee_users_path(:subdomain => subdomain) %> |
+      <%= link_to "Manage Employees", list_employees_users_path(:subdomain => subdomain) %> |
     <% elsif  current_user.is_registrant? %>
       <%= link_to "My Profile", my_profile_profiles_path(:subdomain => subdomain) %> |
     <% elsif  current_user.is_scheduler? %>

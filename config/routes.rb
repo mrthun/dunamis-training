@@ -14,7 +14,7 @@ Training::Application.routes.draw do
 
   resources :users do
     collection do
-      get 'new_employee'
+      get 'new_employee',"list_employees","delete_employee"
       post 'create_employee'
     end
   end
@@ -94,7 +94,7 @@ Training::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
 end
 #== Route Map
-# Generated on 14 Jul 2011 19:18
+# Generated on 15 Jul 2011 12:23
 #
 #                      register        /register(.:format)                      {:controller=>"users", :action=>"create"}
 #                         login        /login(.:format)                         {:controller=>"sessions", :action=>"new"}
@@ -103,6 +103,8 @@ end
 #                                      /(.:format)                              {:controller=>"home", :subdomain=>"", :action=>"index"}
 #                                      /(.:format)                              {:controller=>"organizations", :action=>"dashboard"}
 #            new_employee_users GET    /users/new_employee(.:format)            {:controller=>"users", :action=>"new_employee"}
+#          list_employees_users GET    /users/list_employees(.:format)          {:controller=>"users", :action=>"list_employees"}
+#         delete_employee_users GET    /users/delete_employee(.:format)         {:controller=>"users", :action=>"delete_employee"}
 #         create_employee_users POST   /users/create_employee(.:format)         {:controller=>"users", :action=>"create_employee"}
 #                         users GET    /users(.:format)                         {:controller=>"users", :action=>"index"}
 #                               POST   /users(.:format)                         {:controller=>"users", :action=>"create"}
@@ -141,6 +143,7 @@ end
 #                               GET    /profiles(.:format)                      {:controller=>"profiles", :action=>"show"}
 #                               PUT    /profiles(.:format)                      {:controller=>"profiles", :action=>"update"}
 #                               DELETE /profiles(.:format)                      {:controller=>"profiles", :action=>"destroy"}
+#                  list_clients GET    /clients/list(.:format)                  {:controller=>"clients", :action=>"list"}
 #     create_basic_data_clients POST   /clients/create_basic_data(.:format)     {:controller=>"clients", :action=>"create_basic_data"}
 #      create_addresses_clients POST   /clients/create_addresses(.:format)      {:controller=>"clients", :action=>"create_addresses"}
 #        create_billing_clients POST   /clients/create_billing(.:format)        {:controller=>"clients", :action=>"create_billing"}

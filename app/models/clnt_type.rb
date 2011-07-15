@@ -1,4 +1,4 @@
-class ClientType < ActiveRecord::Base
+class ClntType < ActiveRecord::Base
   has_many :basic_data, :dependent => :destroy
 
   attr_accessible :title
@@ -11,7 +11,7 @@ end
 
 # == Schema Information
 #
-# Table name: client_types
+# Table name: clnt_types
 #
 #  id         :integer(4)      not null, primary key
 #  title      :string(255)

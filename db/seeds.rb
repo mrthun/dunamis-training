@@ -30,7 +30,7 @@ pay_types = PayType.all
 pay_types.each{ |type| type.destroy } unless pay_types.blank?
 
 puts "Destroying all old client types...."
-client_types = ClientType.all
+client_types = ClntType.all
 client_types.each{ |type| type.destroy } unless client_types.blank?
 
 puts "Creating default user roles...."
@@ -71,7 +71,7 @@ end
 
 puts "Creating default client types...."
 %w(nursing_home hospital clinic).each do |title|
-  ClientType.create!(:title => title)
+  ClntType.create!(:title => title)
 end
 
 

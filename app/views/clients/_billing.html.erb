@@ -1,1 +1,18 @@
 <h1>Billing Data</h1>
+<%= error_messages_for :resource %>
+<% form_for :resource,@resource, :url => create_billing_clients_path, :html=>{:id => "clientForm"} do |b| %>
+  <%= hidden_field_tag :c_id,@client.id %>
+  Preferred Bill In: <%= select( "resource", "preferred_bill_in", { "FAX" => "fax", "Email" => "email", "Mail" => "mail"}) %><br /><br />
+  Pay Term: <%= b.text_field :pay_term %><br /><br />
+  Week Start: <%= b.text_field :week_start %><br /><br />
+  Week End: <%= b.text_field :week_end %><br /><br />
+  OverTime: <%= select( "resource", "over_time", { "Charge Overtime" => "charge_overtime", "Don't Charge Overtime" => "dont_charge_overtime", "Don't Work Overtime" => "dont_work_overtime", "Not Defined" => "not_defined"}) %><br /><br />
+  Lunch Rule: <%= b.text_field :lunch_rule %><br /><br />
+  Lunch Break: <%= b.text_field :lunch_break %><br /><br />
+  Time Rounding: <%= b.text_field :time_rounding %><br /><br />
+  Pay Type: <%= select_tag "resource[pay_type_id]", options_from_collection_for_select(PayType.all, :id, :title, @resource.pay_type_id ) %><br /><br />
+  Credit Line: <%= b.text_field :credit_line %><br /><br />
+  Interest: <%= b.text_field :interest %><br /><br />
+  charge_interest? <%= select( "resource", "charge_interest", { "YES" => "1", "NO" => "0"}) %><br /><br />
+  <%= submit_tag "Submit", :class=>"client_submit" %><br /><br />
+<%end%>

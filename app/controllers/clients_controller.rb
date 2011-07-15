@@ -44,19 +44,71 @@ class ClientsController < ApplicationController
   end
 
   def create_basic_data
-
+    @client = User.find_by_id(params[:c_id])
+    if @client.basic_data.present?
+      @resource = @client.basic_data
+      success = @resource.update_attributes(params[:resource])
+    else
+      @resource = BasicData.new(params[:resource])
+      @resource.client_id = @client.id
+      @resource.client_type = @client.class.name
+      success = @resource.save
+    end
+    if success
+      @resource = @client.address.present? ? @client.address : Address.new
+    end
+    render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
   end
 
   def create_addresses
-
+    @client = User.find_by_id(params[:c_id])
+    if @client.address.present?
+      @resource = @client.address
+      success = @resource.update_attributes(params[:resource])
+    else
+      @resource = Address.new(params[:resource])
+      @resource.client_id = @client.id
+      @resource.client_type = @client.class.name
+      success = @resource.save
+    end
+    if success
+      @resource = @client.billing_data.present? ? @client.billing_data : BillingData.new
+    end
+    render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
   end
 
   def create_billing
-
+    @client = User.find_by_id(params[:c_id])
+    if @client.billing_data.present?
+      @resource = @client.billing_data
+      success = @resource.update_attributes(params[:resource])
+    else
+      @resource = BillingData.new(params[:resource])
+      @resource.client_id = @client.id
+      @resource.client_type = @client.class.name
+      success = @resource.save
+    end
+    if success
+      @resource = @client.client_locations.present? ? @client.client_locations.first : ClientLocation.new
+    end
+    render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
   end
 
   def create_locations
-
+    @client = User.find_by_id(params[:c_id])
+    if @client.client_locations.present?
+      @resource = @client.client_locations.first
+      success = @resource.update_attributes(params[:resource])
+    else
+      @resource = ClientLocation.new(params[:resource])
+      @resource.client_id = @client.id
+      @resource.client_type = @client.class.name
+      success = @resource.save
+    end
+    if success
+      @resource = @client.basic_data.present? ? @client.basic_data : BasicData.new
+    end
+    render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
   end
 
 end

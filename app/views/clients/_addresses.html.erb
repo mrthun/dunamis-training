@@ -1,1 +1,24 @@
 <h1>Addresses</h1>
+<%= error_messages_for :resource %>
+<% form_for :resource,@resource, :url => create_addresses_clients_path, :html=>{:id => "clientForm"} do |ad| %>
+  <%= hidden_field_tag :c_id,@client.id %>
+  <h2> Billing</h2>
+  Contact Name: <%= ad.text_field :billing_contact_name %><br /><br />
+  Address 1: <%= ad.text_field :billing_address_1 %><br /><br />
+  Address 2: <%= ad.text_field :billing_address_2 %><br /><br />
+  City: <%= ad.text_field :billing_city %><br /><br />
+  Zip: <%= ad.text_field :billing_zip %><br /><br />
+  Phone Number: <%= ad.text_field :billing_phone %><br /><br />
+  Fax Number: <%= ad.text_field :billing_fax %><br /><br />
+  Email: <%= ad.text_field :billing_email %><br /><br />
+  <h2> Location </h2>
+  Contact Name: <%= ad.text_field :location_contact_name %><br /><br />
+  Address 1: <%= ad.text_field :location_address_1 %><br /><br />
+  Address 2: <%= ad.text_field :location_address_2 %><br /><br />
+  City: <%= ad.text_field :location_city %><br /><br />
+  Zip: <%= ad.text_field :location_zip %><br /><br />
+  Phone Number: <%= ad.text_field :location_phone %><br /><br />
+  Fax Number: <%= ad.text_field :location_fax %><br /><br />
+  Email: <%= ad.text_field :location_email %><br /><br />
+  <%= submit_tag "Submit", :class=>"client_submit" %><br /><br />
+<%end%>

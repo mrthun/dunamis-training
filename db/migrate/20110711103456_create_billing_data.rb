@@ -13,8 +13,8 @@ class CreateBillingData < ActiveRecord::Migration
       t.column :time_rounding, :integer
       t.column :pay_type_id, :integer
       t.column :credit_line, :integer
-      t.column :intrest, :integer
-      t.column :charge_intrest, :boolean
+      t.column :interest, :integer
+      t.column :charge_interest, :boolean
       
       t.timestamps
     end

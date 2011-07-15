@@ -5,7 +5,7 @@ class CreateBasicData < ActiveRecord::Migration
       t.column :client_type, :string
       t.column :name, :text
       t.column :comment, :string
-      t.column :client_type_id, :integer
+      t.column :clnt_type_id, :integer
       t.timestamps
     end
   end

@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      flash.now[:notice] = "An email has been sent to the created emplyee with activation information."
+      flash[:notice] = "An email has been sent to the created emplyee with activation information."
       redirect_to :action => :list_employees
     else
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."

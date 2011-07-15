@@ -52,11 +52,11 @@ class UsersController < ApplicationController
   def create_employee
     @user = User.new(params[:user])
     @user.roles << Role.find_by_id(params[:role_id])
-    puts "dddddddddddddddddd",params[:user][:organization_type]
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      redirect_back_or_default('/', :notice => "An email has been sent to the created emplyee with activation information.")
+      flash.now[:notice] = "An email has been sent to the created emplyee with activation information."
+      redirect_to :action => :list_employees
     else
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'

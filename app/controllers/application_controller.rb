@@ -1,3 +1,4 @@
+require "paperclip"
 class ApplicationController < ActionController::Base
   include UrlHelper
   include AuthenticatedSystem

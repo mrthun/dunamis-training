@@ -9,6 +9,7 @@ gem 'mysql'
 gem 'jquery-rails'
 gem 'annotate'
 gem 'friendly_id'
+gem 'paperclip'
 
 # Use unicorn as the web server
 # gem 'unicorn'

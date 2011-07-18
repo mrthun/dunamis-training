@@ -1,5 +1,5 @@
 <h1>Upload Driving License</h1>
-<div id="license"></div>
+<div id="license"><%= current_user.asset("driving_license").asset.original_filename %></div>
 <% form_for :asset , :url => { :controller => "profiles", :action => "upload_asset", :key => "driving_license" }, :html => {:id =>"licenseForm", :multipart => true }  do |r| %>
   <%=  r.file_field :asset  %><br /><br />
 <% end %>

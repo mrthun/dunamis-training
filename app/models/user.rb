@@ -109,13 +109,17 @@ class User < ActiveRecord::Base
     roles.include? Role.find_by_title "client"
   end
 
-  def has_asset?(asset)
-    assets.select{ |asset| asset.asset_asset_type == asset } if assets.present?
+  def has_asset?(name)
+    asset(name)
   end
 
-  def remove_asset(asset)
-    assets =  assets.select{ |asset| asset.asset_asset_type == asset } if assets.present?
-    assets.each { |ast| ast.destroy } unless assets.blank?
+  def remove_asset(name)
+    asset =  asset(name)
+    asset.destroy if asset.present?
+  end
+
+  def asset(name)
+    assets.find_by_asset_asset_type(name) if assets.present?
   end
 
   def self.employees

@@ -1,5 +1,5 @@
 <h1>Upload Resume</h1>
-<div id="resume"></div>
+<div id="resume"><%= current_user.asset("resume").orignal_filename %></div>
 <% form_for :asset , :url => { :controller => "profiles", :action => "upload_asset", :key => "resume" }, :html => {:id =>"resumeForm", :multipart => true }  do |r| %>
   <%=  r.file_field :asset  %><br /><br />
 <% end %>

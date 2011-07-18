@@ -127,13 +127,13 @@ class ProfilesController < ApplicationController
       if current_user.has_asset?(params[:key])
         current_user.remove_asset(params[:key])
       end
-      @resume = Asset.new(params[:asset])
-      @resume.user = current_user
-      @resume.asset_asset_type = "#{params[:key]}"
-      if @resume.save && @resume.errors.empty?
-        render :text => @resume.asset.url
+      @asset = Asset.new(params[:asset])
+      @asset.user = current_user
+      @asset.asset_asset_type = "#{params[:key]}"
+      if @asset.save && @asset.errors.empty?
+        render :text => "<a href='http://#{request.host_with_port}#{@asset.asset.url}'>"
       else
-        render :text => @resume.errors
+        render :text => @asset.errors
       end
     end
   end

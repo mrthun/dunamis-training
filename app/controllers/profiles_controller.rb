@@ -131,7 +131,7 @@ class ProfilesController < ApplicationController
       @asset.user = current_user
       @asset.asset_asset_type = "#{params[:key]}"
       if @asset.save && @asset.errors.empty?
-        render :text => "<a href='http://#{request.host_with_port}#{@asset.asset.url}'>"
+        render :text => @asset.asset.asset_file_name
       else
         render :text => @asset.errors
       end

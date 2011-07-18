@@ -114,8 +114,8 @@ class User < ActiveRecord::Base
   end
 
   def remove_asset(asset)
-    resume =  assets.select{ |asset| asset.asset_asset_type == asset } if assets.present?
-    resume.destroy
+    assets =  assets.select{ |asset| asset.asset_asset_type == asset } if assets.present?
+    assets.each { |ast| ast.destroy } unless assets.blank?
   end
 
   def self.employees

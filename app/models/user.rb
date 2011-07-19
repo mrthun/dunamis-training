@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
   #
   validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
     :length     => { :maximum => 100 },
-    :allow_nil  => true
+    :allow_nil  => true,
+    :uniqueness => true
 
   validates :email, :presence   => true,
     :uniqueness => true,
@@ -49,7 +50,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :name, :email,:password, :password_confirmation, :status_id, :organization_id
+  attr_accessible :name, :email,:password, :password_confirmation, :status_id, :organization_id, :organization_type
 
   attr_accessor_with_default :skip_activation, false
 
@@ -125,20 +126,24 @@ class User < ActiveRecord::Base
     assets.find_by_asset_asset_type(name) if assets.present?
   end
 
+  def registrants
+    employees.select{ |user| user.is_registrant? && user.active? }
+  end
+
   def self.employees
-    all.select{ |user| user.is_registrant? || user.is_scheduler? }
+    all.select{ |user| (user.is_registrant? || user.is_scheduler?) && user.active? }
   end
   
   def self.clients
-    all.select{ |user| user.is_client? }
+    all.select{ |user| user.is_client? && user.active? }
   end
 
   def self.organizations
-    all.select{ |user| user.is_organization? }
+    all.select{ |user| user.is_organization? && user.active? }
   end
   
   def self.registrants
-    all.select{ |user| user.is_registrant? }
+    all.select{ |user| user.is_registrant? && user.active? }
   end
 
   protected

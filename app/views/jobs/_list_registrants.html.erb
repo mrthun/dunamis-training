@@ -1,5 +1,5 @@
 <h1>Available Registrants</h1>
-<% unless @registrants.blank? %>
+<% if @registrants.present? %>
   <table>
     <tr>
       <th>Email</th>
@@ -9,7 +9,7 @@
     <% @registrants.each do |registrant| %>
       <tr>
         <td><%= registrant.email %></td>
-        <td><%= registrant.personal_data.phone %></td>
+        <td><%= registrant.personal_data.phone if registrant.personal_data.present? %></td>
         <td><%= link_to "Schedule job",schedule_jobs_path(:id => registrant.id ) %></td>
       </tr>
     <%end%>

@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+
   before_filter :login_required
   access_control :DEFAULT => 'scheduler'
 
@@ -7,12 +8,13 @@ class JobsController < ApplicationController
   end
 
   def new
-    @registrant = User.registrants
+    @registrants = @organization.registrants
   end
 
   def list_registrants
+    # params[:service],params[:duration],params[:location],params[:date]
     # TODO: need to do searching here.....
-    @registrant = User.registrants
+    @registrants = @organization.registrants
     render :json => {:success => true, :html => render_to_string(:partial => "/jobs/list_registrants.html") }.to_json
   end
 

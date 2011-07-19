@@ -1,0 +1,26 @@
+<h1>Schedule New Job</h1>
+<h3> Client's Request</h3>
+<% form_tag list_registrants_jobs_path, :id => "listRegistrantForm" do %>
+  Service: <%= text_field_tag "service" %><br/><br />
+  Date: <%= date_select "date","date" %><br/><br />
+  Duration: <%= text_field_tag "duration" %><br/><br />
+  Location: <%= text_field_tag "location" %><br/><br />
+  <%= submit_tag "Search", :class=>"listRegistrantForm_submit" %><br /><br />
+<%end%>
+
+<div id="registrants">
+  <%= render :partial => "/jobs/list_registrants" %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".listRegistrantForm_submit").click(function(){
+      $.post($("form#listRegistrantForm").attr("action"), $("form#listRegistrantForm").serialize(), function(response){
+        if(response.success){
+          $("#registrants").html(response.html);
+        }
+      }, "json");
+      return false;
+    });
+  });
+</script>

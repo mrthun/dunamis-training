@@ -13,9 +13,14 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
-    @user.roles << Role.find_by_title("organization")
-    @user.subdomain = Subdomain.new :name => params[:user][:name].downcase
-
+    @user.roles << Role.find_by_title(params[:role])
+    if params[:role] == 'registrant'
+      @organization = User.find_by_id(params[:organization_id])
+      @user.organization_id = @organization.id
+      @user.organization_type = @organization.class.name
+    elsif params[:role] == 'organization'
+      @user.subdomain = Subdomain.new :name => params[:user][:name].downcase
+    end
     success = @user && @user.save
 
     if success && @user.errors.empty?

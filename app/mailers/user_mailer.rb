@@ -3,14 +3,13 @@ class UserMailer < ActionMailer::Base
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'
-    url  = user.is_organization? ? "http://#{user.subdomain.name}.#{@host}/activate/#{user.activation_code}" : "http://#{@host}/activate/#{user.activation_code}"
+    url = user.is_organization? ? "http://#{user.subdomain.name}.#{@host}/activate/#{user.activation_code}" : "http://#{@host}/activate/#{user.activation_code}"
     @url  = url
   end
   
   def activation(user)
     setup_email(user)
     @subject    += 'Your account has been activated!'
-    #subdomian = user.is_organization? ? user.subdomain.name : user.organization.subdomain.name
     @url  = "http://#{@host}/"
   end
   

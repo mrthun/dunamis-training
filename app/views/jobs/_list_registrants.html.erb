@@ -1,0 +1,17 @@
+<h1>Available Registrants</h1>
+<% unless @registrants.blank? %>
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+    <% @registrants.each do |registrant| %>
+      <tr>
+        <td><%= registrant.email %></td>
+        <td><%= registrant.personal_data.phone %></td>
+        <td><%= link_to "Schedule job",schedule_jobs_path(:id => registrant.id ) %></td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>

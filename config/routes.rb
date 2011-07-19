@@ -36,6 +36,13 @@ Training::Application.routes.draw do
     end
   end
 
+  resource :jobs do
+    collection do
+      get "list","scedule"
+      post "list_registrants"
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

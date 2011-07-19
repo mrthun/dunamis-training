@@ -39,6 +39,9 @@ class User < ActiveRecord::Base
   has_one :billing_data, :as => :client, :dependent => :destroy
   has_many :client_locations, :as => :client, :dependent => :destroy
   has_many :employees, :as => :organization, :class_name => "User", :dependent => :destroy
+  has_many :created_jobs, :as => :creator, :class_name => "Job", :dependent => :destroy
+  has_many :requested_jobs, :as => :client, :class_name => "Job", :dependent => :destroy
+  has_many :assigned_jobs, :as => :registrant, :class_name => "Job", :dependent => :destroy
 
   belongs_to :status
   belongs_to :organization, :class_name => "User", :foreign_key => 'organization_id'
@@ -128,6 +131,14 @@ class User < ActiveRecord::Base
   
   def self.clients
     all.select{ |user| user.is_client? }
+  end
+
+  def self.organizations
+    all.select{ |user| user.is_organization? }
+  end
+  
+  def self.registrants
+    all.select{ |user| user.is_registrant? }
   end
 
   protected

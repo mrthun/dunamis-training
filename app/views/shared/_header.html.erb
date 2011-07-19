@@ -1,5 +1,5 @@
-<% if is_subdomian?(request.subdomain) %>
-  <h1><%= link_to request.subdomain , root_url(:subdomain => request.subdomain ) %></h1>
+<% if @organization.present? %>
+  <h1><%= link_to @organization.subdomain.name , root_url(:subdomain => @organization.subdomain.name ) %></h1>
 <%else%>
   <h1><%= link_to "DUNAMIS TRAINING", root_url(:subdomain => false ) %></h1>
 <%end%>
@@ -11,21 +11,22 @@
 <%end%>
 
 
-<% subdomain = is_subdomian?(request.subdomain) ? request.subdomain : false %>
+<% subdomain = @organization.present? ? @organization.subdomain.name : false %>
 <% if logged_in? %>
-  <% if is_subdomian?(request.subdomain) %>
+  <% if @organization.present? %>
     <% if  current_user.is_organization? %>
       <%= link_to "Manage Employees", list_employees_users_path(:subdomain => subdomain) %> |
     <% elsif  current_user.is_registrant? %>
       <%= link_to "My Profile", my_profile_profiles_path(:subdomain => subdomain) %> |
     <% elsif  current_user.is_scheduler? %>
       <%= link_to "Manage Clients",list_clients_path(:subdomain => subdomain) %> |
+      <%= link_to "Manage Jobs",list_jobs_path(:subdomain => subdomain) %> |
     <%end%>
   <%end%>
   <%= link_to "Sign Out", logout_path(:subdomain => subdomain) %>
 <%else%>
-  <%= link_to "Sign In", login_path(:subdomain => subdomain) %>
-  <% if !is_subdomian?(request.subdomain) %>
-    | <%= link_to "Sign Up As Organization", signup_path %>
+  <%= link_to "Sign In", login_url(:subdomain => subdomain) %>
+  <% unless @organization.present? %>
+    | <%= link_to "Get Registered", signup_url(:subdomain => subdomain) %>
   <%end%>
 <%end%>

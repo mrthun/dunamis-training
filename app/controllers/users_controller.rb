@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      @user.activate!
+      #@user.activate!
       flash[:notice] = "An email has been sent to the created emplyee with activation information."
       redirect_to :action => :list_employees
     else

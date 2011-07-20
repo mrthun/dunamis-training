@@ -12,9 +12,7 @@ class JobsController < ApplicationController
   end
 
   def list_registrants
-    # params[:service],params[:duration],params[:location],params[:date]
-    # TODO: need to do searching here.....
-    @registrants = @organization.registrants
+    @registrants = @organization.filter_registrants(params[:service],params[:location])
     render :json => {:success => true, :html => render_to_string(:partial => "/jobs/list_registrants.html") }.to_json
   end
 

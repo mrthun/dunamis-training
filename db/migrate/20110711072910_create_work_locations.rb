@@ -6,7 +6,7 @@ class CreateWorkLocations < ActiveRecord::Migration
       t.column :name, :string
       t.column :first_worked, :string
       t.column :received_orientation, :datetime
-      t.column :do_not_schedual, :boolean
+      t.column :do_not_schedule, :boolean
       t.column :comment, :text
       t.timestamps
     end

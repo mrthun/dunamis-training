@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_filter :login_required
+  before_filter :set_client, :except => [:list, :new, :create ]
   access_control :DEFAULT => 'scheduler'
 
   def list
@@ -25,7 +26,6 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = User.find_by_id(params[:c_id])
     if request.xhr? && params[:link].present?
       case params[:link]
       when "basic_data"
@@ -44,16 +44,15 @@ class ClientsController < ApplicationController
   end
 
   def create_basic_data
-    @client = User.find_by_id(params[:c_id])
     if @client.basic_data.present?
       @resource = @client.basic_data
       success = @resource.update_attributes(params[:resource])
     else
       @resource = BasicData.new(params[:resource])
-      @resource.client_id = @client.id
-      @resource.client_type = @client.class.name
+      @resource.client = @client
       success = @resource.save
     end
+    @client.update_attribute(:status_id,params[:status_id]) if params[:status_id].present?
     if success
       @resource = @client.address.present? ? @client.address : Address.new
     end
@@ -61,14 +60,12 @@ class ClientsController < ApplicationController
   end
 
   def create_addresses
-    @client = User.find_by_id(params[:c_id])
     if @client.address.present?
       @resource = @client.address
       success = @resource.update_attributes(params[:resource])
     else
       @resource = Address.new(params[:resource])
-      @resource.client_id = @client.id
-      @resource.client_type = @client.class.name
+      @resource.client = @client
       success = @resource.save
     end
     if success
@@ -78,14 +75,12 @@ class ClientsController < ApplicationController
   end
 
   def create_billing
-    @client = User.find_by_id(params[:c_id])
     if @client.billing_data.present?
       @resource = @client.billing_data
       success = @resource.update_attributes(params[:resource])
     else
       @resource = BillingData.new(params[:resource])
-      @resource.client_id = @client.id
-      @resource.client_type = @client.class.name
+      @resource.client = @client
       success = @resource.save
     end
     if success
@@ -95,14 +90,12 @@ class ClientsController < ApplicationController
   end
 
   def create_locations
-    @client = User.find_by_id(params[:c_id])
     if @client.client_locations.present?
       @resource = @client.client_locations.first
       success = @resource.update_attributes(params[:resource])
     else
       @resource = ClientLocation.new(params[:resource])
-      @resource.client_id = @client.id
-      @resource.client_type = @client.class.name
+      @resource.client = @client
       success = @resource.save
     end
     if success
@@ -111,4 +104,10 @@ class ClientsController < ApplicationController
     render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
   end
 
+  private
+
+  def set_client
+    @client = User.find_by_id(params[:c_id])
+  end
+  
 end

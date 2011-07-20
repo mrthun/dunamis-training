@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       @organization = User.find_by_id(params[:organization_id])
       @user.organization_id = @organization.id
       @user.organization_type = @organization.class.name
+      @user.status_id = Status.find_by_title("missing_data").id
     elsif params[:role] == 'organization'
       @user.subdomain = Subdomain.new :name => params[:user][:name].downcase
     end
@@ -56,11 +57,15 @@ class UsersController < ApplicationController
 
   def create_employee
     @user = User.new(params[:user])
-    @user.roles << Role.find_by_id(params[:role_id])
+    @role = Role.find_by_id(params[:role_id])
+    @user.roles << @role
+    if @role.title == 'registrant'
+      @user.status_id = Status.find_by_title("missing_data").id
+    end
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      #@user.activate!
+      @user.activate!
       flash[:notice] = "An email has been sent to the created emplyee with activation information."
       redirect_to :action => :list_employees
     else

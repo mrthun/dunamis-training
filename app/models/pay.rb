@@ -1,5 +1,5 @@
 class Pay < ActiveRecord::Base
-  belongs_to :registrant, :class_name => "User", :foreign_key => 'registrant_id'
+  belongs_to :registrant, :polymorphic => true
   belongs_to :pay_type
 end
 

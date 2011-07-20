@@ -4,7 +4,11 @@
   Location Name: <%= l.text_field :name %><br /><br />
   First Worked: <%= l.text_field :first_worked %><br /><br />
   Received Orientation: <%= l.date_select :received_orientation %><br /><br />
-  Do Not Schedual? <%= select( "resource", "do_not_schedual", { "YES" => "1", "NO" => "0"}) %><br /><br />
+  Do Not Schedual? <%= select( "resource", "do_not_schedule", { "YES" => "1", "NO" => "0"}) %><br /><br />
   Comment: <%= l.text_area :comment %><br /><br />
+  <% if @registrant.status.title =="do_not_schedule"   %>
+    <% @statuses = Status.all.select{|s| s.title == "active" || s.title == "do_not_schedule"} %>
+    Status: <%= select_tag :status_id, options_from_collection_for_select(@statuses, :id, :title, @registrant.status_id ) %><br /><br />
+  <%end%>
   <%= submit_tag "Submit", :class=>"profle_submit" %><br /><br />
 <%end%>

@@ -1,5 +1,5 @@
 class PersonalData < ActiveRecord::Base
-  belongs_to :registrant, :class_name => "User", :foreign_key => 'registrant_id'
+  belongs_to :registrant, :polymorphic => true
 end
 
 # == Schema Information

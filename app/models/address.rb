@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-  belongs_to :client, :class_name => "User", :foreign_key => 'client_id'
+  belongs_to :client, :polymorphic => true
 end
 
 # == Schema Information

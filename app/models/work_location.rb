@@ -1,5 +1,5 @@
 class WorkLocation < ActiveRecord::Base
-  belongs_to :registrant, :class_name => "User", :foreign_key => 'registrant_id'
+  belongs_to :registrant, :polymorphic => true
 end
 
 # == Schema Information
@@ -12,7 +12,7 @@ end
 #  name                 :string(255)
 #  first_worked         :string(255)
 #  received_orientation :datetime
-#  do_not_schedual      :boolean(1)
+#  do_not_schedule      :boolean(1)
 #  comment              :text
 #  created_at           :datetime
 #  updated_at           :datetime

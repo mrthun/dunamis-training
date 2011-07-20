@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   has_many :assigned_jobs, :as => :registrant, :class_name => "Job", :dependent => :destroy
 
   belongs_to :status
-  belongs_to :organization, :class_name => "User", :foreign_key => 'organization_id'
+  belongs_to :organization, :polymorphic => true
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -59,7 +59,6 @@ class User < ActiveRecord::Base
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
-    self.status_id = Status.find_by_title("active").id
     save(:validate => false)
   end
 
@@ -85,9 +84,9 @@ class User < ActiveRecord::Base
     u && u.authenticated?(password) ? u : nil
   end
 
-  #  def login=(value)
-  #    write_attribute :login, (value ? value.downcase : nil)
-  #  end
+  def name=(value)
+    write_attribute :name, (value ? value.downcase : nil)
+  end
 
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
@@ -128,6 +127,12 @@ class User < ActiveRecord::Base
 
   def registrants
     employees.select{ |user| user.is_registrant? && user.active? }
+  end
+
+  def filter_registrants(service, location)
+    registrants.select do |r|
+      r.status.title == "active" && r.skill.occupation_type.title.include?("#{service.downcase}") && r.work_location.name.include?("#{location.downcase}") && r.work_location.do_not_schedule == false
+    end
   end
 
   def self.employees

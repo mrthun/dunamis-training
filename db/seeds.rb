@@ -39,7 +39,7 @@ puts "Creating default user roles...."
 end
 
 puts "Creating default statuses...."
-%w(active do_not_schedual missing_credentails missing_data lead contract on_hold).each do |title|
+%w(active do_not_schedule missing_credentials missing_data lead contract on_hold).each do |title|
   Status.create!(:title => title)
 end
 
@@ -73,9 +73,3 @@ puts "Creating default client types...."
 %w(nursing_home hospital clinic).each do |title|
   ClntType.create!(:title => title)
 end
-
-
-
-
-
-

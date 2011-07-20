@@ -5,12 +5,14 @@
     <tr>
       <th>Email</th>
       <th>Role</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
     <% @employees.each do |employee| %>
       <tr>
         <td><%= employee.email %></td>
         <td><%= employee.roles.first.title %></td>
+        <td><%= employee.status.present? ? employee.status.title : "N/A" %></td>
         <td><%= link_to "Delete",delete_employee_users_path(:id => employee.id ) %></td>
       </tr>
     <%end%>

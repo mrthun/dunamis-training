@@ -1,0 +1,13 @@
+<h1>Schedule Job for <%= @registrant.personal_data.first_name %></h1>
+<% form_for :job,@job, :url => jobs_path do |j| %>
+  <%= hidden_field_tag :registrant_id, @registrant.id  %>
+  facility : <%= j.text_field:facility, :value => @service %><br /><br />
+  Client: <%= select_tag :client_id, options_from_collection_for_select(@clients, :id, :name ) %>  <%= link_to "Add New Client", new_clients_path %><br /><br />
+  Date: <%= j.date_select :date  %><br /><br />
+  Duration: <%= j.text_field :hours  %><br /><br />
+  Date: <%= j.date_select :date  %><br /><br />
+  Payroll Status:<%= select( "job", "payroll_status", { "Pending" => "pending", "Paid" => "paid", "Past Due" => "past_due"}) %><br /><br />
+  Invoice Status: <%= select( "job", "invoice_status", { "Pending" => "pending", "Paid" => "paid", "Past Due" => "past_due"}) %><br /><br />
+  Location: <%= j.text_field :location, :value => @location %><br/><br />
+  <%= submit_tag "Submit" %><br /><br />
+<%end%>

@@ -129,10 +129,15 @@ class User < ActiveRecord::Base
     employees.select{ |user| user.is_registrant? && user.active? }
   end
 
+  def clients
+    employees.select{ |user| user.is_client? && user.active? }
+  end
+
   def filter_registrants(service, location)
-    registrants.select do |r|
+    registrants = self.registrants.select do |r|
       r.status.title == "active" && r.skill.occupation_type.title.include?("#{service.downcase}") && r.work_location.name.include?("#{location.downcase}") && r.work_location.do_not_schedule == false
     end
+    return { :registrants => registrants, :service => registrants.first.skill.occupation_type.title, :location => registrants.first.work_location.name }
   end
 
   def self.employees

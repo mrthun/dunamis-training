@@ -12,8 +12,10 @@
         <td><%= registrant.email %></td>
         <td><%= registrant.personal_data.cell_phone if registrant.personal_data.present? %></td>
         <td><%= registrant.status.title %></td>
-        <td><%= link_to "Schedule job",schedule_jobs_path(:id => registrant.id ) %></td>
+        <td><%= link_to "Schedule job",schedule_jobs_path(:id => registrant.id, :service => @service, :location => @location ) %></td>
       </tr>
     <%end%>
   </table>
+<%else%>
+  Please enter the Client's request to filter the available registrants.
 <%end%>

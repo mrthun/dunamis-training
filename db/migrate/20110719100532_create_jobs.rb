@@ -10,6 +10,7 @@ class CreateJobs < ActiveRecord::Migration
       t.text :facility
       t.datetime :date
       t.integer :hours
+      t.text :location
       t.string :payroll_status
       t.string :invoice_status
       t.timestamps

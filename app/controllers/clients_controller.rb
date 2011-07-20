@@ -14,9 +14,10 @@ class ClientsController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.roles << Role.find_by_title("client")
+    @user.organization = @organization
     success = @user && @user.save
-
     if success && @user.errors.empty?
+      @user.activate!
       flash[:notice] = "A New Client has been created"
       redirect_to :action => :show, :c_id => @user.id
     else

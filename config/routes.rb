@@ -38,7 +38,7 @@ Training::Application.routes.draw do
 
   resource :jobs do
     collection do
-      get "list","schedule"
+      get "list","schedule","delete"
       post "list_registrants"
     end
   end

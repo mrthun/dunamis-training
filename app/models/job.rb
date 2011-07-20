@@ -1,7 +1,7 @@
 class Job < ActiveRecord::Base
 
-  belongs_to :creator
-  belongs_to :client
-  belongs_to :registrant
+  belongs_to :creator, :polymorphic => true
+  belongs_to :client, :polymorphic => true
+  belongs_to :registrant, :polymorphic => true
 
 end

@@ -5,6 +5,7 @@ class Subdomain < ActiveRecord::Base
   validates :name , :presence => true
 end
 
+
 # == Schema Information
 #
 # Table name: subdomains

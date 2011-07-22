@@ -2,6 +2,7 @@ class Credential < ActiveRecord::Base
   belongs_to :registrant, :polymorphic => true
 end
 
+
 # == Schema Information
 #
 # Table name: credentials

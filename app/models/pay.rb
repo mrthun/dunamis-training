@@ -3,6 +3,7 @@ class Pay < ActiveRecord::Base
   belongs_to :pay_type
 end
 
+
 # == Schema Information
 #
 # Table name: pays

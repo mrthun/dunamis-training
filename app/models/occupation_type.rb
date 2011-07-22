@@ -9,6 +9,7 @@ class OccupationType < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: occupation_types

@@ -3,6 +3,7 @@ class Skill < ActiveRecord::Base
   belongs_to :occupation_type
 end
 
+
 # == Schema Information
 #
 # Table name: skills

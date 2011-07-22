@@ -10,6 +10,7 @@ class PayType < ActiveRecord::Base
   
 end
 
+
 # == Schema Information
 #
 # Table name: pay_types

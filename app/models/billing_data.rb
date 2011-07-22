@@ -3,6 +3,7 @@ class BillingData < ActiveRecord::Base
   belongs_to :pay_type
 end
 
+
 # == Schema Information
 #
 # Table name: billing_data
@@ -20,8 +21,8 @@ end
 #  time_rounding     :integer(4)
 #  pay_type_id       :integer(4)
 #  credit_line       :integer(4)
-#  interest           :integer(4)
-#  charge_interest    :boolean(1)
+#  interest          :integer(4)
+#  charge_interest   :boolean(1)
 #  created_at        :datetime
 #  updated_at        :datetime
 #

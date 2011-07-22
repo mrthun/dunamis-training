@@ -3,6 +3,7 @@ class Preference < ActiveRecord::Base
   belongs_to :contract_type
 end
 
+
 # == Schema Information
 #
 # Table name: preferences

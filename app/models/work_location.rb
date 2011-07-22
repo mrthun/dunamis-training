@@ -2,6 +2,7 @@ class WorkLocation < ActiveRecord::Base
   belongs_to :registrant, :polymorphic => true
 end
 
+
 # == Schema Information
 #
 # Table name: work_locations

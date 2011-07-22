@@ -7,6 +7,7 @@ class ClientLocationTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: client_locations

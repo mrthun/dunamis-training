@@ -7,6 +7,7 @@ class ContractTypeTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: contract_types

@@ -2,6 +2,7 @@ class ClientLocation < ActiveRecord::Base
   belongs_to :client, :polymorphic => true
 end
 
+
 # == Schema Information
 #
 # Table name: client_locations

@@ -2,6 +2,7 @@ class PersonalData < ActiveRecord::Base
   belongs_to :registrant, :polymorphic => true
 end
 
+
 # == Schema Information
 #
 # Table name: personal_data

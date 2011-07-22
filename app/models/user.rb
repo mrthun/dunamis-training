@@ -172,6 +172,7 @@ class User < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: users
@@ -188,5 +189,7 @@ end
 #  activation_code           :string(40)
 #  activated_at              :datetime
 #  status_id                 :integer(4)
+#  organization_id           :integer(4)
+#  organization_type         :string(255)
 #
 

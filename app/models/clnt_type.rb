@@ -9,6 +9,7 @@ class ClntType < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: clnt_types

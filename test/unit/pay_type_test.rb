@@ -7,6 +7,7 @@ class PayTypeTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: pay_types

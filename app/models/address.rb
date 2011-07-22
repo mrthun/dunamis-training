@@ -2,6 +2,7 @@ class Address < ActiveRecord::Base
   belongs_to :client, :polymorphic => true
 end
 
+
 # == Schema Information
 #
 # Table name: addresses

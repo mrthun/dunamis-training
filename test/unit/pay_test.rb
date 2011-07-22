@@ -7,6 +7,7 @@ class PayTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: pays

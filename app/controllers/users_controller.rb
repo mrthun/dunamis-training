@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      @user.activate!
+      #@user.activate!
       redirect_back_or_default('/', :notice => "Thanks for signing up!  We're sending you an email with your activation code.")
     else
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      @user.activate!
+      #@user.activate!
       flash[:notice] = "An email has been sent to the created emplyee with activation information."
       redirect_to :action => :list_employees
     else

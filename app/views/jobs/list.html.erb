@@ -31,7 +31,7 @@
           }
         });
       },
-      eventDrop: function(event,dayDelta,revertFunc) {
+      eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
         if (confirm("Are you sure about this change?")) {
           $.ajax({
             url: "/jobs/update_job/"+event.id+"/"+dayDelta+"/date",
@@ -45,10 +45,10 @@
             }
           });
         }else{
-          revertFunc();
+          revertFunc.call();
         }
       },
-      eventResize: function(event,dayDelta,revertFunc) {
+      eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
         if (confirm("is this okay?")) {
           $.ajax({
             url: "/jobs/update_job/"+event.id+"/"+dayDelta+"/hours",

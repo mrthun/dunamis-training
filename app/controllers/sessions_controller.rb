@@ -18,7 +18,13 @@ class SessionsController < ApplicationController
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
-      redirect_back_or_default('/', :notice => "Logged in successfully")
+      flash[:notice] = "Logged in successfully"
+      if current_user.is_admin?
+        redirect_to root_url(:subdomain => false )
+      else
+        subdomain = current_user.is_organization? ? current_user.subdomain.name : current_user.organization.subdomain.name
+        redirect_to root_url(:subdomain => subdomain )
+      end
     else
       note_failed_signin
       @login       = params[:email]
@@ -32,7 +38,7 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/', :notice => "You have been logged out.")
   end
 
-protected
+  protected
   # Track failed login attempts
   def note_failed_signin
     flash.now[:error] = "Couldn't log you in as '#{params[:email]}'"

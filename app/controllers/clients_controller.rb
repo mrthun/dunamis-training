@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_filter :login_required
   before_filter :set_client, :except => [:list, :new, :create ]
-  access_control :DEFAULT => 'scheduler'
+  #access_control :DEFAULT => ['scheduler','admin','organization']
 
   def list
     @clients = User.clients
@@ -103,6 +103,16 @@ class ClientsController < ApplicationController
       @resource = @client.basic_data.present? ? @client.basic_data : BasicData.new
     end
     render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
+  end
+
+  def jobs_history
+    @client = User.find_by_id(params[:id])
+    @jobs = @client.requested_jobs
+  end
+
+  def scheduled_history
+    @scheduler = User.find_by_id(params[:id])
+    @jobs = @scheduler.created_jobs
   end
 
   private

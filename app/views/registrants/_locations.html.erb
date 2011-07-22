@@ -1,6 +1,6 @@
 <h1>Work Locations</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_location_profiles_path, :html=>{:id => "profileForm"} do |l| %>
+<% form_for :resource,@resource, :url => create_location_registrants_path, :html=>{:id => "profileForm"} do |l| %>
   Location Name: <%= l.text_field :name %><br /><br />
   First Worked: <%= l.text_field :first_worked %><br /><br />
   Received Orientation: <%= l.date_select :received_orientation %><br /><br />

@@ -20,18 +20,26 @@ Training::Application.routes.draw do
   end
 
   resource :session, :only => [:new, :create, :destroy]
+
   resources :home
-  resource :organizations
-  resource :profiles do
+
+  resource :organizations do
     collection do
-      get "my_profile"
+      get "list","dashboard","all_reports","reports","statistics"
+      get 'history/:id', :to  => "organizations#history", :as => :history
+    end
+  end
+
+  resource :registrants do
+    collection do
+      get "my_profile","jobs_history"
       post "create_personal_data","create_skill","create_preference","create_pay","create_location","create_credential","upload_asset"
     end
   end
 
   resource :clients do
     collection do
-      get "list"
+      get "list","jobs_history","scheduled_history"
       post "create_basic_data", "create_addresses","create_billing","create_locations"
     end
   end
@@ -136,20 +144,20 @@ end
 #                               GET    /organizations(.:format)                 {:action=>"show", :controller=>"organizations"}
 #                               PUT    /organizations(.:format)                 {:action=>"update", :controller=>"organizations"}
 #                               DELETE /organizations(.:format)                 {:action=>"destroy", :controller=>"organizations"}
-#           my_profile_profiles GET    /profiles/my_profile(.:format)           {:action=>"my_profile", :controller=>"profiles"}
-# create_personal_data_profiles POST   /profiles/create_personal_data(.:format) {:action=>"create_personal_data", :controller=>"profiles"}
-#         create_skill_profiles POST   /profiles/create_skill(.:format)         {:action=>"create_skill", :controller=>"profiles"}
-#    create_preference_profiles POST   /profiles/create_preference(.:format)    {:action=>"create_preference", :controller=>"profiles"}
-#           create_pay_profiles POST   /profiles/create_pay(.:format)           {:action=>"create_pay", :controller=>"profiles"}
-#      create_location_profiles POST   /profiles/create_location(.:format)      {:action=>"create_location", :controller=>"profiles"}
-#    create_credential_profiles POST   /profiles/create_credential(.:format)    {:action=>"create_credential", :controller=>"profiles"}
-#         upload_asset_profiles POST   /profiles/upload_asset(.:format)         {:action=>"upload_asset", :controller=>"profiles"}
-#                      profiles POST   /profiles(.:format)                      {:action=>"create", :controller=>"profiles"}
-#                  new_profiles GET    /profiles/new(.:format)                  {:action=>"new", :controller=>"profiles"}
-#                 edit_profiles GET    /profiles/edit(.:format)                 {:action=>"edit", :controller=>"profiles"}
-#                               GET    /profiles(.:format)                      {:action=>"show", :controller=>"profiles"}
-#                               PUT    /profiles(.:format)                      {:action=>"update", :controller=>"profiles"}
-#                               DELETE /profiles(.:format)                      {:action=>"destroy", :controller=>"profiles"}
+#           my_profile_registrants GET    /registrants/my_profile(.:format)           {:action=>"my_profile", :controller=>"registrants"}
+# create_personal_data_registrants POST   /registrants/create_personal_data(.:format) {:action=>"create_personal_data", :controller=>"registrants"}
+#         create_skill_registrants POST   /registrants/create_skill(.:format)         {:action=>"create_skill", :controller=>"registrants"}
+#    create_preference_registrants POST   /registrants/create_preference(.:format)    {:action=>"create_preference", :controller=>"registrants"}
+#           create_pay_registrants POST   /registrants/create_pay(.:format)           {:action=>"create_pay", :controller=>"registrants"}
+#      create_location_registrants POST   /registrants/create_location(.:format)      {:action=>"create_location", :controller=>"registrants"}
+#    create_credential_registrants POST   /registrants/create_credential(.:format)    {:action=>"create_credential", :controller=>"registrants"}
+#         upload_asset_registrants POST   /registrants/upload_asset(.:format)         {:action=>"upload_asset", :controller=>"registrants"}
+#                      registrants POST   /registrants(.:format)                      {:action=>"create", :controller=>"registrants"}
+#                  new_registrants GET    /registrants/new(.:format)                  {:action=>"new", :controller=>"registrants"}
+#                 edit_registrants GET    /registrants/edit(.:format)                 {:action=>"edit", :controller=>"registrants"}
+#                               GET    /registrants(.:format)                      {:action=>"show", :controller=>"registrants"}
+#                               PUT    /registrants(.:format)                      {:action=>"update", :controller=>"registrants"}
+#                               DELETE /registrants(.:format)                      {:action=>"destroy", :controller=>"registrants"}
 #                  list_clients GET    /clients/list(.:format)                  {:action=>"list", :controller=>"clients"}
 #     create_basic_data_clients POST   /clients/create_basic_data(.:format)     {:action=>"create_basic_data", :controller=>"clients"}
 #      create_addresses_clients POST   /clients/create_addresses(.:format)      {:action=>"create_addresses", :controller=>"clients"}

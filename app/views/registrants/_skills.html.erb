@@ -3,13 +3,13 @@
   <% @dlicense = @registrant.asset("driving_license") %>
   <%= @dlicense.asset.original_filename if @dlicense.present? %>
 </div>
-<% form_for :asset , :url => { :controller => "profiles", :action => "upload_asset", :key => "driving_license" }, :html => {:id =>"licenseForm", :multipart => true }  do |r| %>
+<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "driving_license" }, :html => {:id =>"licenseForm", :multipart => true }  do |r| %>
   <%=  r.file_field :asset  %><br /><br />
 <% end %>
 
 <h1>Skills</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_skill_profiles_path, :html=>{:id => "profileForm"} do |s| %>
+<% form_for :resource,@resource, :url => create_skill_registrants_path, :html=>{:id => "profileForm"} do |s| %>
   Occupation: <%= select_tag "resource[occupation_type_id]", options_from_collection_for_select(OccupationType.all, :id, :title, @resource.occupation_type_id ) %><br /><br />
   <%= submit_tag "Submit", :class=>"profle_submit" %><br /><br />
 <%end%>

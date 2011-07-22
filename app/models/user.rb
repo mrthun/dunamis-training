@@ -129,6 +129,10 @@ class User < ActiveRecord::Base
     employees.select{ |user| user.is_registrant? && user.active? }
   end
 
+  def schedulers
+    employees.select{ |user| user.is_scheduler? && user.active? }
+  end
+
   def clients
     employees.select{ |user| user.is_client? && user.active? }
   end

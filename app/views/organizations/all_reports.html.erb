@@ -1,0 +1,25 @@
+<h1>Organizations Reports</h1>
+Organization: <%= select_tag  "organization_id", options_from_collection_for_select(@organizations, :id, :name ) %><br /><br />
+
+<div id="report">
+  <%= render :partial  => "/organizations/report" %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#organization_id").change(function(){
+      $.ajax({
+        url: "/organizations/history/"+$(this).val(),
+        type: 'GET',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if(response.success === true) {
+            $("#report").html(response.html)
+          }
+        }
+      });
+      return false;
+    });
+  });
+</script>

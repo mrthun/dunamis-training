@@ -1,0 +1,18 @@
+<% unless schedulers.blank? %>
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <% schedulers.each do |scheduler| %>
+      <tr>
+        <td><%= scheduler.email %></td>
+        <td>
+          <% if current_user.is_admin? || current_user.is_organization? %>
+            <%= link_to "View Scheduled Jobs History", scheduled_history_clients_path(:id => scheduler.id ) %>
+          <%end%>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>

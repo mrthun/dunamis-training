@@ -1,33 +1,6 @@
 <br /><%= link_to "Create New Job", new_jobs_path %>
 <h1>All Jobs List</h1>
-<% unless @jobs.blank? %>
-  <table>
-    <tr>
-      <th>Client</th>
-      <th>Facility</th>
-      <th>Registrant</th>
-      <th>Date</th>
-      <th>Hours</th>
-      <th>Location</th>
-      <th>Payroll Status</th>
-      <th>Invoice Status</th>
-      <th>Actions</th>
-    </tr>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.client.email %></td>
-        <td><%= job.facility %></td>
-        <td><%= job.registrant.email %></td>
-        <td><%= job.date %></td>
-        <td><%= job.hours %></td>
-        <td><%= job.location %></td>
-        <td><%= job.payroll_status %></td>
-        <td><%= job.invoice_status %></td>
-        <td><%= link_to 'Delete', delete_jobs_path(:id=>job.id) %></td>
-      </tr>
-    <%end%>
-  </table>
-<%end%>
+<%= render :partial => "/jobs/list", :locals => {:jobs => @jobs} %>
 <div id="calendar"></div>
 
 <script type='text/javascript'>

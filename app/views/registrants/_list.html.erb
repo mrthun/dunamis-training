@@ -1,0 +1,20 @@
+<% unless registrants.blank? %>
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <% registrants.each do |registrant| %>
+      <tr>
+        <td><%= registrant.email %></td>
+        <td><%= registrant.status.title %></td>
+        <td>
+          <% if current_user.is_admin? || current_user.is_organization? %>
+            <%= link_to "View Jobs History",jobs_history_registrants_path(:id => registrant.id ) %>
+          <%end%>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>

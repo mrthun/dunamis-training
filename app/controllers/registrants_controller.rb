@@ -1,7 +1,7 @@
-class ProfilesController < ApplicationController
+class RegistrantsController < ApplicationController
 
   before_filter :login_required, :set_registrant
-  access_control :DEFAULT => 'registrant'
+  #access_control :DEFAULT => ['registrant','admin','organization']
 
   def my_profile
     if request.xhr? && params[:link].present?
@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
       when "locations"
         @resource = @registrant.work_location.present? ? @registrant.work_location : WorkLocation.new
       end
-      render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+      render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
     else
       @resource = @registrant.personal_data.present? ? @registrant.personal_data : PersonalData.new
     end
@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
     if success
       @resource = @registrant.skill.present? ? @registrant.skill : Skill.new
     end
-    render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
   def create_skill
@@ -52,7 +52,7 @@ class ProfilesController < ApplicationController
     if success
       @resource = @registrant.preference.present? ? @registrant.preference : Preference.new
     end
-    render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
   def create_preference
@@ -67,7 +67,7 @@ class ProfilesController < ApplicationController
     if success
       @resource = @registrant.pay.present? ? @registrant.pay : Pay.new
     end
-    render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
  
   end
 
@@ -84,7 +84,7 @@ class ProfilesController < ApplicationController
     if success
       @resource = @registrant.credential.present? ? @registrant.credential : Credential.new
     end
-    render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
   def create_credential
@@ -100,7 +100,7 @@ class ProfilesController < ApplicationController
     if success
       @resource = @registrant.work_location.present? ? @registrant.work_location : WorkLocation.new
     end
-    render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
   def create_location
@@ -116,7 +116,7 @@ class ProfilesController < ApplicationController
     if success
       @resource = @registrant.personal_data.present? ? @registrant.personal_data : PersonalData.new
     end
-    render :json => {:success => true, :html => render_to_string(:partial => "/profiles/profile.html") }.to_json
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
   def upload_asset
@@ -133,6 +133,11 @@ class ProfilesController < ApplicationController
         render :text => @asset.errors
       end
     end
+  end
+
+  def jobs_history
+    @registrant = User.find_by_id(params[:id])
+    @jobs = @registrant.assigned_jobs
   end
 
   private

@@ -1,0 +1,20 @@
+<% unless clients.blank? %>
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <% clients.each do |client| %>
+      <tr>
+        <td><%= client.email %></td>
+        <td>
+          <% if current_user.is_admin? || current_user.is_organization? %>
+            <%= link_to "View Jobs History", jobs_history_clients_path(:id => client.id ) %>
+          <%else%>
+            <%= link_to "Modify Details", {:action =>:show, :c_id => client.id} %>
+          <%end%>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>

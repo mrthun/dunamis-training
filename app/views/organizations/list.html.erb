@@ -1,0 +1,30 @@
+<h1>All Organizations List</h1>
+<% unless @organizations.blank? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>URL</th>
+      <th>Total Employees</th>
+      <th>Total Schedulers</th>
+      <th>Total Registrants</th>
+      <th>Total Associated Clients</th>
+      <th>Actions</th>
+    </tr>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td><%= organization.name %></td>
+        <td><%= organization.email %></td>
+        <td><%= "http://#{organization.subdomain.name}.#{request.host_with_port}/" %></td>
+        <td><%= organization.employees.size %></td>
+        <td><%= organization.schedulers.size %></td>
+        <td><%= organization.registrants.size %></td>
+        <td><%= organization.clients.size %></td>
+        <td>
+          <%= link_to "Statistics",statistics_organizations_path(:id => organization.id ) %> |
+          <%= link_to "Delete" %>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>

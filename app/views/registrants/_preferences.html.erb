@@ -1,6 +1,6 @@
 <h1>Preferences</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_preference_profiles_path, :html=>{:id => "profileForm"} do |p| %>
+<% form_for :resource,@resource, :url => create_preference_registrants_path, :html=>{:id => "profileForm"} do |p| %>
   Work On Weekends? <%= select( "resource", "work_on_weekends", { "YES" => "1", "NO" => "0"}) %><br /><br />
   Work After Hours? <%= select( "resource", "work_after_hours", { "YES" => "1", "NO" => "0"}) %><br /><br />
   Maximum Driving Distance: <%= p.text_field :max_driving_distance %><br /><br />

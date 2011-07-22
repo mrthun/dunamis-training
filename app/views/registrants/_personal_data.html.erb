@@ -3,13 +3,13 @@
   <% @resume = @registrant.asset("resume") %>
   <%= @resume.asset.original_filename if @resume.present? %>
 </div>
-<% form_for :asset , :url => { :controller => "profiles", :action => "upload_asset", :key => "resume" }, :html => {:id =>"resumeForm", :multipart => true }  do |r| %>
+<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "resume" }, :html => {:id =>"resumeForm", :multipart => true }  do |r| %>
   <%=  r.file_field :asset  %><br /><br />
 <% end %>
 
 <h1>Personal Data</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_personal_data_profiles_path, :html=>{:id => "profileForm"} do |pd| %>
+<% form_for :resource,@resource, :url => create_personal_data_registrants_path, :html=>{:id => "profileForm"} do |pd| %>
   First Name: <%= pd.text_field :first_name %><br /><br />
   Last Name: <%= pd.text_field :last_name %><br /><br />
   Birth Date: <%= pd.date_select :birth_date %><br /><br />

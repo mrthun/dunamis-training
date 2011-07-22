@@ -15,10 +15,10 @@
     </tr>
     <% jobs.each do |job| %>
       <tr>
-        <td><%= job.client.email %></td>
+        <td><%= job.client.name %></td>
         <td><%= job.facility %></td>
-        <td><%= job.registrant.email %></td>
-        <td><%= job.date %></td>
+        <td><%= job.registrant.personal_data.first_name %></td>
+        <td><%= job.date.strftime("%d/%m/%Y") %></td>
         <td><%= job.hours %></td>
         <td><%= job.location %></td>
         <td><%= job.payroll_status %></td>

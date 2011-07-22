@@ -1,0 +1,18 @@
+<div style="float:right;margin: 10px;">
+  <%= link_to "Close", "javascript:void(0);", :id => "close" %><br /><br />
+</div>
+<h2>Job Details</h2>
+Facility: <%= @job.facility %> <br /><br />
+Requested By: <%= @job.client.name %> <br /><br />
+Assigned To: <%= @job.registrant.personal_data.first_name %> <br /><br />
+Start Date: <%= @job.date.strftime("%d/%m/%Y") %> <br /><br />
+Duration: <%= @job.hours %> Hours <br /><br />
+
+<script type='text/javascript'>
+
+  $(document).ready(function() {
+    $("#close").click(function(){
+      $("#details").hide();
+    });
+  });
+</script>

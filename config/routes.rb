@@ -48,6 +48,8 @@ Training::Application.routes.draw do
     collection do
       get "list","schedule","delete"
       post "list_registrants"
+      get 'details/:id', :to  => "jobs#details", :as => :details
+      get 'update_job/:id/:days/:key', :to  => "jobs#update_job", :as => :update_job
     end
   end
 

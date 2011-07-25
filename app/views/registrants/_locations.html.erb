@@ -1,10 +1,37 @@
 <h1>Work Locations</h1>
+<% unless @locations.blank? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>First Worked</th>
+      <th>Received Orientation</th>
+      <th>Do Not Schedule?</th>
+      <th>Comments</th>
+      <th>Actions</th>
+    </tr>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.name %></td>
+        <td><%= location.first_worked %></td>
+        <td><%= location.received_orientation.strftime("%d/%m/%Y") %></td>
+        <td><%= location.do_not_schedule %></td>
+        <td><%= location.comment %></td>
+        <td>
+          <%= link_to "Remove" %>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+  No Work Location Listed yet.<br /><br />
+<%end%>
+<h2>Add New Work Location</h2>
 <%= error_messages_for :resource %>
 <% form_for :resource,@resource, :url => create_location_registrants_path(:r_id => @registrant.id), :html=>{:id => "profileForm"} do |l| %>
   Location Name: <%= l.text_field :name %><br /><br />
   First Worked: <%= l.text_field :first_worked %><br /><br />
   Received Orientation: <%= l.date_select :received_orientation %><br /><br />
-  Do Not Schedual? <%= select( "resource", "do_not_schedule", { "YES" => "1", "NO" => "0"}) %><br /><br />
+  Do Not Schedule? <%= select( "resource", "do_not_schedule", { "YES" => "1", "NO" => "0"}) %><br /><br />
   Comment: <%= l.text_area :comment %><br /><br />
   <% if @registrant.status.title =="do_not_schedule"   %>
     <% @statuses = Status.all.select{|s| s.title == "active" || s.title == "do_not_schedule"} %>

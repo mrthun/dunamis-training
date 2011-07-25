@@ -36,7 +36,8 @@ class ClientsController < ApplicationController
       when "billing"
         @resource = @client.billing_data.present? ? @client.billing_data : BillingData.new
       when "locations"
-        @resource = @client.client_locations.present? ? @client.client_locations.first : ClientLocation.new
+        @locations = @client.client_locations
+        @resource = ClientLocation.new
       end
       render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
     else
@@ -91,16 +92,12 @@ class ClientsController < ApplicationController
   end
 
   def create_locations
-    if @client.client_locations.present?
-      @resource = @client.client_locations.first
-      success = @resource.update_attributes(params[:resource])
-    else
-      @resource = ClientLocation.new(params[:resource])
-      @resource.client = @client
-      success = @resource.save
-    end
+    @resource = ClientLocation.new(params[:resource])
+    @resource.client = @client
+    success = @resource.save
     if success
-      @resource = @client.basic_data.present? ? @client.basic_data : BasicData.new
+      @locations = @client.client_locations
+      @resource = ClientLocation.new
     end
     render :json => {:success => true, :html => render_to_string(:partial => "/clients/client.html") }.to_json
   end

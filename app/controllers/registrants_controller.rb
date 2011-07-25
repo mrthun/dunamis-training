@@ -17,7 +17,8 @@ class RegistrantsController < ApplicationController
       when "credentials"
         @resource = @registrant.credential.present? ? @registrant.credential : Credential.new
       when "locations"
-        @resource = @registrant.work_location.present? ? @registrant.work_location : WorkLocation.new
+        @locations = @registrant.work_locations
+        @resource = WorkLocation.new
       end
       render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
     else
@@ -98,23 +99,20 @@ class RegistrantsController < ApplicationController
     end
     @registrant.update_attribute(:status_id,Status.find_by_title("do_not_schedule").id)
     if success
-      @resource = @registrant.work_location.present? ? @registrant.work_location : WorkLocation.new
+      @locations = @registrant.work_locations
+      @resource = WorkLocation.new
     end
     render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
   def create_location
-    if @registrant.work_location.present?
-      @resource = @registrant.work_location
-      success = @resource.update_attributes(params[:resource])
-    else
-      @resource = WorkLocation.new(params[:resource])
-      @resource.registrant = @registrant
-      success = @resource.save
-    end
-    @registrant.update_attribute(:status_id,params[:status_id]) if params[:status_id].present?
+    @resource = WorkLocation.new(params[:resource])
+    @resource.registrant = @registrant
+    success = @resource.save
+    @locations = @registrant.work_locations
     if success
-      @resource = @registrant.personal_data.present? ? @registrant.personal_data : PersonalData.new
+      @registrant.update_attribute(:status_id,params[:status_id]) if params[:status_id].present?
+      @resource = WorkLocation.new
     end
     render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end

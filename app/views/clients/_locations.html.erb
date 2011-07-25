@@ -1,4 +1,39 @@
 <h1>Client Locations</h1>
+<% unless @locations.blank? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Contact Name</th>
+      <th>Address 1</th>
+      <th>Address 2</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>Phone</th>
+      <th>FAX</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.name %></td>
+        <td><%= location.contact_name %></td>
+        <td><%= location.address_1 %></td>
+        <td><%= location.address_2 %></td>
+        <td><%= location.city %></td>
+        <td><%= location.zip %></td>
+        <td><%= location.phone %></td>
+        <td><%= location.fax %></td>
+        <td><%= location.email %></td>
+        <td>
+          <%= link_to "Remove" %>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+  No Location Listed yet.<br /><br />
+<%end%>
+<h2>Add New Location</h2>
 <%= error_messages_for :resource %>
 <% form_for :resource,@resource, :url => create_locations_clients_path(:c_id => @client.id), :html=>{:id => "clientForm"} do |l| %>
   Location Name: <%= l.text_field :name %><br /><br />

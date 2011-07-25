@@ -3,6 +3,7 @@ class Credential < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: credentials

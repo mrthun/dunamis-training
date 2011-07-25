@@ -6,6 +6,7 @@ class Subdomain < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: subdomains

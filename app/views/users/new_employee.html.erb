@@ -3,6 +3,8 @@
 <%= form_for :user, :url => create_employee_users_path do |f| -%>
   <%= f.hidden_field :organization_id, :value => current_user.id %>
   <%= f.hidden_field :organization_type, :value => current_user.class.name %>
+  <%= f.hidden_field :status_id, :value => Status.find_by_title("not_activated").id %>
+
   <p><%= label_tag 'email' %><br/>
     <%= f.text_field :email %></p>
 

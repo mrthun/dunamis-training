@@ -3,16 +3,16 @@
   <% @resume = @registrant.asset("resume") %>
   <%= @resume.asset.original_filename if @resume.present? %>
 </div>
-<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "resume" }, :html => {:id =>"resumeForm", :multipart => true }  do |r| %>
+<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "resume", :r_id => @registrant.id }, :html => {:id =>"resumeForm", :multipart => true }  do |r| %>
   <%=  r.file_field :asset  %><br /><br />
 <% end %>
 
 <h1>Personal Data</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_personal_data_registrants_path, :html=>{:id => "profileForm"} do |pd| %>
+<% form_for :resource,@resource, :url => create_personal_data_registrants_path(:r_id => @registrant.id), :html=>{:id => "profileForm"} do |pd| %>
   First Name: <%= pd.text_field :first_name %><br /><br />
+  Middle Name: <%= pd.text_field :middle_name %><br /><br />
   Last Name: <%= pd.text_field :last_name %><br /><br />
-  Birth Date: <%= pd.date_select :birth_date %><br /><br />
   Home Address 1: <%= pd.text_field :home_address_1 %><br /><br />
   Home Address 2: <%= pd.text_field :home_address_2 %><br /><br />
   City: <%= pd.text_field :city %><br /><br />
@@ -20,10 +20,14 @@
   Home Phone: <%= pd.text_field :home_phone %><br /><br />
   Cell Phone: <%= pd.text_field :cell_phone %><br /><br />
   Hire Date: <%= pd.date_select :hire_date %><br /><br />
-  Social Security Number: <%= pd.text_field :social_security_number %><br /><br />
-  Bank: <%= pd.text_field :bank %><br /><br />
-  Account Number: <%= pd.text_field :account_number %><br /><br />
+  <% if current_user.is_organization? %>
+    Birth Date: <%= pd.date_select :birth_date %><br /><br />
+    Social Security Number: <%= pd.text_field :social_security_number %><br /><br />
+    Bank: <%= pd.text_field :bank %><br /><br />
+    Account Number: <%= pd.text_field :account_number %><br /><br />
+  <%end%>
   Routing Number: <%= pd.text_field :routing_number %><br /><br />
+
   <%= submit_tag "Submit", :class=>"profle_submit" %><br /><br />
 <%end%>
 

@@ -110,11 +110,6 @@ class ClientsController < ApplicationController
     @jobs = @client.requested_jobs
   end
 
-  def scheduled_history
-    @scheduler = User.find_by_id(params[:id])
-    @jobs = @scheduler.created_jobs
-  end
-
   private
 
   def set_client

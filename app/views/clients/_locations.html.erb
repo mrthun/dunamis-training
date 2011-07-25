@@ -1,7 +1,6 @@
 <h1>Client Locations</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_locations_clients_path, :html=>{:id => "clientForm"} do |l| %>
-  <%= hidden_field_tag :c_id,@client.id %>
+<% form_for :resource,@resource, :url => create_locations_clients_path(:c_id => @client.id), :html=>{:id => "clientForm"} do |l| %>
   Location Name: <%= l.text_field :name %><br /><br />
   Contact Name: <%= l.text_field :contact_name %><br /><br />
   Address 1: <%= l.text_field :address_1 %><br /><br />

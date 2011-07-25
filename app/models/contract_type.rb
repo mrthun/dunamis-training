@@ -10,6 +10,7 @@ class ContractType < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: contract_types

@@ -1,5 +1,5 @@
 class OccupationType < ActiveRecord::Base
-  has_one :skills, :dependent => :destroy
+  has_one :skill, :dependent => :destroy
 
   attr_accessible :title
 
@@ -8,6 +8,7 @@ class OccupationType < ActiveRecord::Base
   end
 
 end
+
 
 
 # == Schema Information

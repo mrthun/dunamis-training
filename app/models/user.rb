@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   has_many :requested_jobs, :as => :client, :class_name => "Job", :dependent => :destroy
   has_many :assigned_jobs, :as => :registrant, :class_name => "Job", :dependent => :destroy
 
+  has_one :profile_data, :as => :scheduler, :dependent => :destroy
+
   belongs_to :status
   belongs_to :organization, :polymorphic => true
 
@@ -59,6 +61,7 @@ class User < ActiveRecord::Base
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
+    self.status_id = self.is_organization? ? Status.find_by_title("active").id : Status.find_by_title("missing_data").id
     save(:validate => false)
   end
 
@@ -145,7 +148,7 @@ class User < ActiveRecord::Base
   end
 
   def self.employees
-    all.select{ |user| (user.is_registrant? || user.is_scheduler?) && user.active? }
+    all.select{ |user| user.is_registrant? || user.is_scheduler? }
   end
   
   def self.clients
@@ -153,7 +156,7 @@ class User < ActiveRecord::Base
   end
 
   def self.organizations
-    all.select{ |user| user.is_organization? && user.active? }
+    all.select{ |user| user.is_organization? }
   end
   
   def self.registrants
@@ -170,6 +173,7 @@ class User < ActiveRecord::Base
 
 
 end
+
 
 
 

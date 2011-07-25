@@ -1,6 +1,7 @@
 <h1>Pays</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_pay_registrants_path, :html=>{:id => "profileForm"} do |p| %>
+<% form_for :resource,@resource, :url => create_pay_registrants_path(:r_id => @registrant.id), :html=>{:id => "profileForm"} do |p| %>
+  Hourly Pay Rate:<%= p.text_field :hourly_rate %><br /><br />
   Regular Hours<br />
   from: <%= p.time_select :regular_hours_from %> to: <%= p.time_select :regular_hours_to %><br /><br />
   Overtime Hours<br />

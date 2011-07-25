@@ -3,6 +3,7 @@ class PersonalData < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: personal_data
@@ -11,6 +12,7 @@ end
 #  registrant_id          :integer(4)
 #  registrant_type        :string(255)
 #  first_name             :string(255)
+#  middle_name            :string(255)
 #  last_name              :string(255)
 #  birth_date             :datetime
 #  home_address_1         :text

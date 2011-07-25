@@ -9,7 +9,7 @@
         <td><%= scheduler.email %></td>
         <td>
           <% if current_user.is_admin? || current_user.is_organization? %>
-            <%= link_to "View Scheduled Jobs History", scheduled_history_clients_path(:id => scheduler.id ) %>
+            <%= link_to "View Scheduled Jobs History", jobs_history_schedulers_path(:s_id => scheduler.id ) %>
           <%end%>
         </td>
       </tr>

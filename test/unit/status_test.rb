@@ -8,6 +8,7 @@ class StatusTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: statuses

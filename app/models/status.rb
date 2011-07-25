@@ -10,6 +10,7 @@ class Status < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: statuses

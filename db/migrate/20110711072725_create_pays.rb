@@ -3,6 +3,7 @@ class CreatePays < ActiveRecord::Migration
     create_table :pays do |t|
       t.column :registrant_id, :integer
       t.column :registrant_type, :string
+      t.column :hourly_rate, :integer
       t.column :regular_hours_from, :datetime
       t.column :regular_hours_to, :datetime
       t.column :overtime_hours_from, :datetime

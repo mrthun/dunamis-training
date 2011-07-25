@@ -8,6 +8,7 @@ class BillingDataTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: billing_data

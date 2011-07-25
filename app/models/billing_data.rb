@@ -4,6 +4,7 @@ class BillingData < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: billing_data

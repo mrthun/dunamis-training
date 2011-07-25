@@ -29,9 +29,9 @@ puts "Destroying all old pay types...."
 pay_types = PayType.all
 pay_types.each{ |type| type.destroy } unless pay_types.blank?
 
-puts "Destroying all old client types...."
-client_types = ClntType.all
-client_types.each{ |type| type.destroy } unless client_types.blank?
+puts "Destroying all old facility types...."
+facility_types = FacilityType.all
+facility_types.each{ |type| type.destroy } unless facility_types.blank?
 
 puts "Creating default user roles...."
 %w(admin organization registrant scheduler client).each do |title|
@@ -39,7 +39,7 @@ puts "Creating default user roles...."
 end
 
 puts "Creating default statuses...."
-%w(active do_not_schedule missing_credentials missing_data lead contract on_hold).each do |title|
+%w(active not_activated do_not_schedule missing_credentials missing_data lead contract on_hold).each do |title|
   Status.create!(:title => title)
 end
 
@@ -69,7 +69,7 @@ puts "Creating default pay types...."
   PayType.create!(:title => title)
 end
 
-puts "Creating default client types...."
+puts "Creating default facility types...."
 %w(nursing_home hospital clinic).each do |title|
-  ClntType.create!(:title => title)
+  FacilityType.create!(:title => title)
 end

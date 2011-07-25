@@ -8,6 +8,7 @@ class SkillTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: skills

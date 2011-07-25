@@ -3,19 +3,27 @@
   <% @dlicense = @registrant.asset("driving_license") %>
   <%= @dlicense.asset.original_filename if @dlicense.present? %>
 </div>
-<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "driving_license" }, :html => {:id =>"licenseForm", :multipart => true }  do |r| %>
-  <%=  r.file_field :asset  %><br /><br />
+<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "driving_license", :r_id => @registrant.id }, :html => {:id =>"licenseForm", :multipart => true }  do |r| %>
+  <%=  r.file_field :asset, :class => "driving_license"  %><br /><br />
+<% end %>
+
+<h3>Upload Skill Test</h3>
+<div id="skilltest">
+  <% @skill = @registrant.asset("skill_test") %>
+  <%= @skill.asset.original_filename if @skill.present? %></div>
+<% form_for :asset , :url => { :controller => "registrants", :action => "upload_asset", :key => "skill_test", :r_id => @registrant.id }, :html => {:id =>"SkillTestForm", :multipart => true }  do |r| %>
+  <%=  r.file_field :asset, :class => "skill_test"  %>
 <% end %>
 
 <h1>Skills</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_skill_registrants_path, :html=>{:id => "profileForm"} do |s| %>
+<% form_for :resource,@resource, :url => create_skill_registrants_path(:r_id => @registrant.id), :html=>{:id => "profileForm"} do |s| %>
   Occupation: <%= select_tag "resource[occupation_type_id]", options_from_collection_for_select(OccupationType.all, :id, :title, @resource.occupation_type_id ) %><br /><br />
   <%= submit_tag "Submit", :class=>"profle_submit" %><br /><br />
 <%end%>
 
 <script type="text/javascript">
-  $('#asset_asset').change(function(){
+  $('.driving_license').change(function(){
     $('#licenseForm').ajaxSubmit({
       beforeSubmit: function(a,f,o) {
         o.dataType = 'json';
@@ -25,6 +33,20 @@
         var body = XMLHttpRequest.responseText;
         var result = body.replace(regex, "");
         $('#license').html(result);
+      }
+    });
+  });
+
+  $('.skill_test').change(function(){
+    $('#SkillTestForm').ajaxSubmit({
+      beforeSubmit: function(a,f,o) {
+        o.dataType = 'json';
+      },
+      complete: function(XMLHttpRequest, textStatus) {
+        var regex = /(<([^>]+)>)/ig;
+        var body = XMLHttpRequest.responseText;
+        var result = body.replace(regex, "");
+        $('#skilltest').html(result);
       }
     });
   });

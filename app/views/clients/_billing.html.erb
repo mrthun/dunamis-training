@@ -1,7 +1,6 @@
 <h1>Billing Data</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_billing_clients_path, :html=>{:id => "clientForm"} do |b| %>
-  <%= hidden_field_tag :c_id,@client.id %>
+<% form_for :resource,@resource, :url => create_billing_clients_path(:c_id => @client.id), :html=>{:id => "clientForm"} do |b| %>
   Preferred Bill In: <%= select( "resource", "preferred_bill_in", { "FAX" => "fax", "Email" => "email", "Mail" => "mail"}) %><br /><br />
   Pay Term: <%= b.text_field :pay_term %><br /><br />
   Week Start: <%= b.text_field :week_start %><br /><br />

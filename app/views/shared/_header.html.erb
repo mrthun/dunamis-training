@@ -15,18 +15,14 @@
 <% if logged_in? %>
   <% if @organization.present? %>
     <% if  current_user.is_organization? %>
-      <%= link_to "Manage Employees", list_employees_users_path(:subdomain => subdomain) %> |
-      <%= link_to "Reports", reports_organizations_url(:subdomain => subdomain) %> |
-      <%= link_to "Statistics", statistics_organizations_url(:subdomain => subdomain) %> |
+      <%= render :partial => "/shared/organization_links", :locals  => { :subdomain => subdomain } %>
     <% elsif  current_user.is_registrant? %>
-      <%= link_to "My Profile", my_profile_registrants_path(:subdomain => subdomain) %> |
+      <%= render :partial => "/shared/registrant_links", :locals  => { :subdomain => subdomain } %>
     <% elsif  current_user.is_scheduler? %>
-      <%= link_to "Manage Clients",list_clients_path(:subdomain => subdomain) %> |
-      <%= link_to "Manage Jobs",list_jobs_path(:subdomain => subdomain) %> |
+      <%= render :partial => "/shared/scheduler_links", :locals  => { :subdomain => subdomain } %>
     <%end%>
   <%else%>
-    <%= link_to "Manage Organizations", list_organizations_url(:subdomain => subdomain) %> |
-    <%= link_to "Reports", all_reports_organizations_url(:subdomain => subdomain) %> |
+    <%= render :partial => "/shared/admin_links", :locals  => { :subdomain => subdomain } %>
   <%end%>
   <%= link_to "Sign Out", logout_path(:subdomain => subdomain) %>
 <%else%>

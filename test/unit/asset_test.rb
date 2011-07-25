@@ -8,6 +8,7 @@ class AssetTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: assets

@@ -3,6 +3,7 @@ class WorkLocation < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: work_locations

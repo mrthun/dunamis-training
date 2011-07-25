@@ -4,6 +4,7 @@ class Skill < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: skills

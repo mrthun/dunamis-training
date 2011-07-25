@@ -4,6 +4,7 @@ class Preference < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: preferences

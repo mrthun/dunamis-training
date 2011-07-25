@@ -1,0 +1,16 @@
+<h1>Profile Data</h1>
+<%= error_messages_for :resource %>
+<% form_for :resource,@resource, :url => create_profile_data_schedulers_path(:s_id => @scheduler.id) do |pd| %>
+  First Name: <%= pd.text_field :first_name %><br /><br />
+  Middle Name: <%= pd.text_field :middle_name %><br /><br />
+  Last Name: <%= pd.text_field :last_name %><br /><br />
+  Home Address 1: <%= pd.text_field :home_address_1 %><br /><br />
+  Home Address 2: <%= pd.text_field :home_address_2 %><br /><br />
+  City: <%= pd.text_field :city %><br /><br />
+  Zip: <%= pd.text_field :zip %><br /><br />
+  Home Phone: <%= pd.text_field :home_phone %><br /><br />
+  Cell Phone: <%= pd.text_field :cell_phone %><br /><br />
+  Birth Date: <%= pd.date_select :birth_date %><br /><br />
+
+  <%= submit_tag "Submit"%><br /><br />
+<%end%>

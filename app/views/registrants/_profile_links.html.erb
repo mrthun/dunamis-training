@@ -1,3 +1,4 @@
 <% %w(Personal_Data Skills Preferences Pays Credentials Locations).each do |link| %>
-  <%= link_to link, my_profile_registrants_path(:link => link.downcase ), :class=>"profile_links" %> |
+  <% next if (link == "Pays" && !current_user.is_organization? ) %>
+  <%= link_to link, profile_registrants_path(:r_id => @registrant.id, :link => link.downcase ), :class=>"profile_links" %> |
 <%end%>

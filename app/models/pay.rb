@@ -4,6 +4,7 @@ class Pay < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: pays
@@ -11,6 +12,7 @@ end
 #  id                  :integer(4)      not null, primary key
 #  registrant_id       :integer(4)
 #  registrant_type     :string(255)
+#  hourly_rate         :integer(4)
 #  regular_hours_from  :datetime
 #  regular_hours_to    :datetime
 #  overtime_hours_from :datetime

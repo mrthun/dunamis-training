@@ -1,0 +1,26 @@
+<h1>All Facilities List</h1>
+<% unless @facilities.blank? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+    <% @facilities.each do |facility| %>
+      <tr>
+        <td><%= facility.title %></td>
+        <td>
+          <%= link_to "Remove", remove_facility_home_index_path(:id => facility.id ) %>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+  No Facility Type Listed Yet. <br /><br />
+<%end%>
+
+<h2>Add New Facility Type</h2>
+<%= form_for :facility_type, :url => add_facility_home_index_path do |f| -%>
+  <p><%= label_tag 'Name' %><br/>
+    <%= f.text_field :title %></p>
+  <p><%= submit_tag 'Add' %></p>
+<% end -%>

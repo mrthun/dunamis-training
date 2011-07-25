@@ -1,9 +1,9 @@
 class RegistrantsController < ApplicationController
 
   before_filter :login_required, :set_registrant
-  #access_control :DEFAULT => ['registrant','admin','organization']
+  #access_control :DEFAULT => 'organization'
 
-  def my_profile
+  def profile
     if request.xhr? && params[:link].present?
       case params[:link]
       when "personal_data"
@@ -143,7 +143,7 @@ class RegistrantsController < ApplicationController
   private
   
   def set_registrant
-    @registrant = current_user
+    @registrant = User.find_by_id(params[:r_id])
   end
 
 end

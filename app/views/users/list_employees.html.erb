@@ -13,7 +13,14 @@
         <td><%= employee.email %></td>
         <td><%= employee.roles.first.title %></td>
         <td><%= employee.status.present? ? employee.status.title : "N/A" %></td>
-        <td><%= link_to "Delete",delete_employee_users_path(:id => employee.id ) %></td>
+        <td>
+          <% unless employee.active? %>
+            <%= link_to "Activate", change_status_users_path(:id => employee.id) %> |
+          <%end%>
+          <% url = employee.is_registrant? ? profile_registrants_path(:r_id => employee.id ) : profile_schedulers_path(:s_id => employee.id )  %>
+          <%= link_to "Manage Profile", url %> |
+          <%= link_to "Delete",delete_employee_users_path(:id => employee.id ) %>
+        </td>
       </tr>
     <%end%>
   </table>

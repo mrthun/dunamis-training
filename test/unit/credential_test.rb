@@ -8,6 +8,7 @@ class CredentialTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: credentials

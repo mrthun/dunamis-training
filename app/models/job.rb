@@ -6,6 +6,7 @@ class Job < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: jobs
@@ -20,10 +21,10 @@ end
 #  facility        :text
 #  date            :datetime
 #  hours           :integer(4)
+#  location        :text
 #  payroll_status  :string(255)
 #  invoice_status  :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
-#  location        :string(45)      not null
 #
 

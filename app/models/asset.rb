@@ -4,6 +4,7 @@ class Asset < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: assets

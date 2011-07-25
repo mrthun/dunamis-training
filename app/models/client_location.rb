@@ -3,6 +3,7 @@ class ClientLocation < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: client_locations

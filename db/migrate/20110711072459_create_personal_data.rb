@@ -4,6 +4,7 @@ class CreatePersonalData < ActiveRecord::Migration
       t.column :registrant_id, :integer
       t.column :registrant_type, :string
       t.column :first_name, :string
+      t.column :middle_name, :string
       t.column :last_name, :string
       t.column :birth_date, :datetime
       t.column :home_address_1, :text
@@ -23,6 +24,6 @@ class CreatePersonalData < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :personals
+    drop_table :personal_data
   end
 end

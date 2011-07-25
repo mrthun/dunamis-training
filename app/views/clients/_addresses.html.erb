@@ -1,7 +1,6 @@
 <h1>Addresses</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_addresses_clients_path, :html=>{:id => "clientForm"} do |ad| %>
-  <%= hidden_field_tag :c_id,@client.id %>
+<% form_for :resource,@resource, :url => create_addresses_clients_path(:c_id => @client.id), :html=>{:id => "clientForm"} do |ad| %>
   <h2> Billing</h2>
   Contact Name: <%= ad.text_field :billing_contact_name %><br /><br />
   Address 1: <%= ad.text_field :billing_address_1 %><br /><br />

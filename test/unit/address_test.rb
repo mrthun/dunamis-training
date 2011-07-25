@@ -8,6 +8,7 @@ class AddressTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: addresses

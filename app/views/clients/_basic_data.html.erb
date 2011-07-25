@@ -1,11 +1,10 @@
 <h1>Basic Data</h1>
 <%= error_messages_for :resource %>
-<% form_for :resource,@resource, :url => create_basic_data_clients_path, :html=>{:id => "clientForm"} do |bd| %>
-  <%= hidden_field_tag :c_id,@client.id %>
+<% form_for :resource,@resource, :url => create_basic_data_clients_path(:c_id => @client.id), :html=>{:id => "clientForm"} do |bd| %>
   <% @statuses = Status.all.select{|s| s.title == "active" || s.title == "lead" || s.title == "contract" || s.title == "on_hold"} %>
   Status: <%= select_tag :status_id, options_from_collection_for_select(@statuses, :id, :title, @client.status_id ) %><br /><br />
   Name: <%= bd.text_field :name %><br /><br />
-  Type: <%= select_tag "resource[clnt_type_id]", options_from_collection_for_select(ClntType.all, :id, :title, @resource.clnt_type_id)  %><br /><br />
+  Type: <%= select_tag "resource[facility_type_id]", options_from_collection_for_select(FacilityType.all, :id, :title, @resource.facility_type_id)  %><br /><br />
   Comments: <%= bd.text_area :comment %><br /><br />
   <%= submit_tag "Submit", :class=>"client_submit" %><br /><br />
 <%end%>

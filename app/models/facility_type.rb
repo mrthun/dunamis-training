@@ -1,5 +1,5 @@
-class ClntType < ActiveRecord::Base
-  has_many :basic_data, :dependent => :destroy
+class FacilityType < ActiveRecord::Base
+  has_many :basic_datas, :dependent => :destroy
 
   attr_accessible :title
 
@@ -10,9 +10,10 @@ class ClntType < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
-# Table name: clnt_types
+# Table name: facility_types
 #
 #  id         :integer(4)      not null, primary key
 #  title      :string(255)

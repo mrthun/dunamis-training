@@ -10,8 +10,7 @@
 
 <ul class="topRightNav">
   <% if logged_in? %>
-    <li><%= current_user.roles.first.title.capitalize %></li>
-    <li class="bdrLnone"><%= current_user.email %></li>
+    <li class="bdrLnone"><%= current_user.email %>( <%= current_user.roles.first.title %> )</li>
     <br />
     <li><%= link_to "SignOut", logout_path(:subdomain => subdomain) %></li>
     <li><a href="#">Account</a></li>

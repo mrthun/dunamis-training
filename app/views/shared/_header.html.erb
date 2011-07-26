@@ -1,6 +1,7 @@
 <div class="logo">
   <% if @organization.present? %>
-    <h1><%= link_to @organization.subdomain.name , root_url(:subdomain => @organization.subdomain.name ) %></h1>
+    <% link = @organization.has_asset?("logo") ?  image_tag(@organization.asset("logo").asset.url , :size => "217x56" ) : @organization.subdomain.name %>
+    <h1><%= link_to  link , root_url(:subdomain => @organization.subdomain.name ) %></h1>
   <%else%>
     <h1><%= link_to image_tag("logo.png"), root_url(:subdomain => false ) %></h1>
   <%end%>

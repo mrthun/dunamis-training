@@ -26,7 +26,12 @@ class UsersController < ApplicationController
     success = @user && @user.save
 
     if success && @user.errors.empty?
-      #@user.activate!
+      if params[:asset].present?
+        @asset = Asset.new(:asset => params[:asset])
+        @asset.user = @user
+        @asset.asset_asset_type = "#{params[:key]}"
+        @asset.save
+      end
       redirect_back_or_default('/', :notice => "Thanks for signing up!  We're sending you an email with your activation code.")
     else
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."

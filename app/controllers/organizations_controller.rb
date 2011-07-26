@@ -21,6 +21,12 @@ class OrganizationsController < ApplicationController
     success = @org && @org.save
 
     if success && @org.errors.empty?
+      if params[:asset].present?
+        @asset = Asset.new(:asset => params[:asset])
+        @asset.user = @org
+        @asset.asset_asset_type = "#{params[:key]}"
+        @asset.save!
+      end
       flash[:notice]  = "New Organization was created. An Email has been sent to created organization with activation code."
       redirect_to :action => :list
     else

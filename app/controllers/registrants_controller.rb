@@ -144,7 +144,6 @@ class RegistrantsController < ApplicationController
   end
 
   def jobs_history
-    @registrant = User.find_by_id(params[:id])
     @jobs = @registrant.assigned_jobs
   end
 

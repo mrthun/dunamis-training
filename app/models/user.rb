@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
-    self.status_id = self.is_organization? ? Status.find_by_title("active").id : Status.find_by_title("missing_data").id
+    self.status_id = self.is_organization? ? Status.find_by_title("active").id : Status.find_by_title("missing_data").id unless self.is_admin?
     save(:validate => false)
   end
 

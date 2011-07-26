@@ -1,4 +1,38 @@
-<%= link_to "Configurations", configurations_home_index_url(:subdomain => subdomain) %> |
-<%= link_to "Manage Employees", list_employees_users_path(:subdomain => subdomain) %> |
-<%= link_to "Reports", reports_organizations_url(:subdomain => subdomain) %> |
-<%= link_to "Statistics", statistics_organizations_url(:subdomain => subdomain) %> |
+<div class="tabs_wrapper">
+  <div class="tabs <%= 'active' if request.request_uri  == "/" %>" >
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Home",root_url(:subdomain => @organization.subdomain.name )%>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if request.request_uri  == "/home/configurations" %>">
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Configurations", configurations_home_index_url(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if request.request_uri  == "/users/list_employees" %>">
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "HR", list_employees_users_path(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if request.request_uri  == "/organizations/reports" %>">
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Reports", reports_organizations_url(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if request.request_uri  == "/organizations/statistics" %>">
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Statistics", statistics_organizations_url(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabsLIne"></div>
+</div>

@@ -1,3 +1,39 @@
-<%= link_to "My Profile", profile_schedulers_path(:s_id => current_user.id, :subdomain => subdomain) %> |
-<%= link_to "Manage Clients",list_clients_path(:subdomain => subdomain) %> |
-<%= link_to "Manage Jobs",list_jobs_path(:subdomain => subdomain) %> |
+<% subdomain = @organization.present? ? @organization.subdomain.name : false %>
+<div class="tabs_wrapper">
+  <div class="tabs <%= 'active' if request.request_uri  == "/" %>" >
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Home", root_url(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if (params[:controller] == "schedulers" && params[:action] == "profile") %>" >
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Profile", profile_schedulers_path(:s_id => current_user.id, :subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if (params[:controller] == "clients" && params[:action] == "list") %>" >
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Clients",list_clients_path(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if (params[:controller] == "jobs" && params[:action] == "list") %>" >
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Scheduling",list_jobs_path(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabs <%= 'active' if (params[:controller] == "schedulers" && params[:action] == "jobs_history") %>" >
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Reports", jobs_history_schedulers_path(:s_id => current_user.id, :subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
+  <div class="tabsLIne"></div>
+</div>

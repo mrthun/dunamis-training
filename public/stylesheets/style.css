@@ -1,0 +1,205 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+  margin:0px;
+  padding:0px;
+  border:none;
+}
+body{
+  font-size:14px;
+  color:#000;
+  font-family:Arial;
+  background:#FFF;
+}
+h1, h2, h3, h4, h5, h6, p, img{
+  margin:0;
+  padding:0;
+}
+h1{
+  font-size:20px;
+  color:#000000;
+}
+h2{
+  font-size:18px;
+  color:#000;
+}
+h4 {
+}
+img{
+  border:none;
+}
+a{
+  color:#000000;
+  text-decoration:none;
+}
+.wrrapper{
+  margin:0 auto;
+  width:1000px;
+}
+.wrrapperBgHolder{
+  float:left;
+  width:100%;
+  background:none scroll 0 0 #f2f2f2;
+}
+.logo{
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 50%;
+}
+.logo img{
+  float:left;
+}
+.topRightNav{
+  float: right;
+  list-style: none outside none;
+  margin-right: 20px;
+  margin-top: 10px;
+  width: auto;
+}
+.topRightNav li{
+  border-left: 1px solid #424242;
+  color: #424242;
+  float: right;
+  font-size: 14px;
+  padding: 0 10px 5px;
+  width: auto;
+}
+.topRightNav li a{
+  text-decoration:none;
+  color:#424242;
+}
+.topRightNav li a:hover{
+  text-decoration:underline;
+  color:#424242;
+}
+.bdrLnone{
+  border-left:none!important;
+}
+
+.tabs_wrapper{
+  float: left;
+  width: 100%;
+
+}
+.tabs_wrapper .active .tabs_left{
+  background-image:url("../images/tabLeftActive.png");
+}
+.tabs_wrapper .active .tabs_right{
+  background-image:url("../images/tabRightActive.png");
+}
+.tabs_wrapper .active .tabs_center{
+  background-image:url("../images/tabCenterActive.png");
+  color:#fff;
+}
+.tabs_wrapper .active .tabs_center span{
+  color:#FFF;
+
+}
+.tabs_wrapper .active .tabs_center p{
+  color:#FFF;
+
+}
+
+.tabs{
+  cursor: pointer;
+  float: left;
+  list-style: none outside none;
+  margin-right: 1px;
+  margin-top: 30px;
+  width: auto;
+}
+
+.tabs_left{
+  background-image:url("../images/tabLeft.png");
+  background-position:center bottom;
+  background-repeat:no-repeat;
+  float:left;
+  height:32px;
+  width:8px;
+}
+.tabs_right{
+  background-image:url("../images/tabRight.png");
+  background-repeat:no-repeat;
+  float:left;
+  height:32px;
+  width:8px;
+}
+.tabs_center{
+  background: url("../images/tabCenter.png") repeat-x scroll 0 0 transparent;
+  color: #FFFFFF;
+  float: left;
+  font-size: 14px;
+  line-height: 32px;
+  padding: 0 15px;
+  text-align: center;
+  width: auto;
+}
+.tabs_center a{
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 32px;
+}
+.tabsLIne{
+  background:url(../images/tabBotomLine.png) repeat-x;
+  float:left;
+  width:100%;
+  height:4px;
+}
+.clientsHolder{
+  background:url(../images/selectBarBG.png) repeat-x;
+  float:left;
+  width:100%;
+  height:36px;
+}
+.clientsSelect{
+  float:left;
+  width:20%;
+  margin-right:2%;
+}
+.clientsSelect label{
+  float:left;
+  width:30%;
+  font-size:14px;
+  color:#000;
+  line-height:36px;
+}
+.clientsSelect select{
+  border: 1px solid #CCCCCC;
+  color: #000000;
+  float: right;
+  font-size: 14px;
+  margin-top: 6px;
+  padding: 2px;
+  width: 60%;
+}
+.mLeft{
+  margin-left:10px;
+}
+.contentHolder{
+  float:left;
+  width:100%;
+  padding-bottom:20px;
+  margin-top:20px;
+}
+.contentHolder img{
+  float:left;
+  margin-left:17px;
+}
+.footer{
+  float:left;
+  width:100%;
+  font-size:12px;
+  color:#999999;
+  margin-top:20px;
+  padding-bottom:20px;
+}
+.footer a{
+  text-decoration:none;
+  color:#999999;
+}
+.footer a:hover{
+  text-decoration:underline;
+  color:#999999;
+}
+

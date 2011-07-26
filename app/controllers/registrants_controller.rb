@@ -117,6 +117,16 @@ class RegistrantsController < ApplicationController
     render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
   end
 
+  def remove_location
+    @loc = WorkLocation.find_by_id(params[:id])
+    @locations = @registrant.work_locations
+    if @loc.destroy
+      @registrant.update_attribute(:status_id,params[:status_id]) if params[:status_id].present?
+      @resource = WorkLocation.new
+    end
+    render :json => {:success => true, :html => render_to_string(:partial => "/registrants/profile.html") }.to_json
+  end
+
   def upload_asset
     if params[:asset].present?
       if @registrant.has_asset?(params[:key])

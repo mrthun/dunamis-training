@@ -75,6 +75,10 @@ class User < ActiveRecord::Base
     activation_code.nil?
   end
 
+  def is_active?
+    status.title.eql?("active")
+  end
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
   # uff.  this is really an authorization, not authentication routine.  
@@ -142,9 +146,9 @@ class User < ActiveRecord::Base
 
   def filter_registrants(service, location)
     registrants = self.registrants.select do |r|
-      r.status.title == "active" && r.skill.occupation_type.title.include?("#{service.downcase}") && r.work_location.name.include?("#{location.downcase}") && r.work_location.do_not_schedule == false
+      r.status.title == "active" && r.skill.occupation_type.title.include?("#{service.downcase}") && @loc = r.work_locations.detect{|loc| loc.name.include?("#{location.downcase}") && loc.do_not_schedule == false }
     end
-    return { :registrants => registrants, :service => registrants.first.skill.occupation_type.title, :location => registrants.first.work_location.name }
+    return { :registrants => registrants, :service => registrants.first.skill.occupation_type.title, :location => @loc.name }
   end
 
   def self.employees

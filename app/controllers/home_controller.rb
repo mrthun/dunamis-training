@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
 
-  before_filter :login_required, :except => :index
+  before_filter :login_required, :except => [:index, :routing]
   access_control [:configurations,
     :occupations, :add_occupation, :remove_occupation,
     :contracts, :add_contract, :remove_contratc,
     :facilities, :add_facility, :remove_facility,
-    :pays, :add_pay, :remove_payg] => 'admin'
+    :pays, :add_pay, :remove_payg] => 'organization'
 
   def index
 
@@ -115,5 +115,8 @@ class HomeController < ApplicationController
     redirect_to :action => :pays
   end
 
+  def routing
+    render :template => "/shared/404.html"
+  end
 
 end

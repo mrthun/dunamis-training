@@ -64,6 +64,7 @@ class JobsController < ApplicationController
 
     if @job.save
       flash[:notice]  = "Job was successfully created"
+      UserMailer.deliver_job_schedule_notifcation(@job)
       redirect_to :action => :list
     else
       flash[:error]  = "Sorry! Job was not created. Please try again."

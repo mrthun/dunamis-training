@@ -1,0 +1,12 @@
+A job was scheduled for <%= @job.registrant.personal_data.first_name %> on request of <%= @job.client.name %>
+
+Client: <%= @job.client.name %>
+Facility:<%= @job.facility %>
+Registrant:<%= @job.registrant.personal_data.first_name %>
+Date:<%= @job.date.strftime("%d/%m/%Y") %>
+Hours:<%= @job.hours %>
+Location:<%= @job.location %>
+
+Pleas Visit this URL:
+
+<%=h @url %>

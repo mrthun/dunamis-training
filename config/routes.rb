@@ -30,22 +30,22 @@ Training::Application.routes.draw do
 
   resource :organizations do
     collection do
-      get "list","dashboard","all_reports","reports","statistics","change_status"
+      get "list","dashboard","all_reports","reports","statistics","change_status","delete_organization"
       get 'history/:id', :to  => "organizations#history", :as => :history
     end
   end
 
   resource :registrants do
     collection do
-      get "profile","jobs_history"
+      get "profile","jobs_history","remove_location"
       post "create_personal_data","create_skill","create_preference","create_pay","create_location","create_credential","upload_asset"
     end
   end
 
   resource :clients do
     collection do
-      get "list","jobs_history","scheduled_history"
-      post "create_basic_data", "create_addresses","create_billing","create_locations"
+      get "list","jobs_history","scheduled_history","remove_location"
+      post "create_basic_data", "create_addresses","create_billing","create_location"
     end
   end
 
@@ -121,6 +121,7 @@ Training::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+  match '*a', :to => 'home#routing'
 end
 #== Route Map
 # Generated on 25 Jul 2011 16:55

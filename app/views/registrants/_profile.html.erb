@@ -39,5 +39,19 @@
       }, "json");
       return false;
     });
+
+    $(".remove").click(function(){
+      $.ajax({
+        url: $(this).attr("href"),
+        type: 'GET',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $("#profile").html(response.html);
+        }
+      });
+      return false;
+    });
+    
   });
 </script>

@@ -35,5 +35,19 @@
       }, "json");
       return false;
     });
+
+    $(".remove").click(function(){
+      $.ajax({
+        url: $(this).attr("href"),
+        type: 'GET',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $("#client").html(response.html);
+        }
+      });
+      return false;
+    });
+    
   });
 </script>

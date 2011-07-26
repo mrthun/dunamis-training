@@ -12,6 +12,16 @@ class UserMailer < ActionMailer::Base
     @subject    += 'Your account has been activated!'
     @url  = "http://#{@host}/"
   end
+
+  def job_schedule_notifcation(job)
+    @host = default_url_options[:host]
+    @recipients  = "#{job.client.email}, #{job.registrant.email}"
+    @from        = "admin@dunamis.com"
+    @subject     = "[DUNAMIS] Job Scheduled"
+    @sent_on     = Time.now
+    @job = job
+    @url  = "http://#{@host}/"
+  end
   
   protected
 

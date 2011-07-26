@@ -14,10 +14,10 @@
         <td><%= location.name %></td>
         <td><%= location.first_worked %></td>
         <td><%= location.received_orientation.strftime("%d/%m/%Y") %></td>
-        <td><%= location.do_not_schedule %></td>
+        <td><%= location.do_not_schedule == "0" ? "YES" : "NO" %></td>
         <td><%= location.comment %></td>
         <td>
-          <%= link_to "Remove" %>
+          <%= link_to "Remove",remove_location_registrants_path(:r_id => @registrant.id, :id => location.id ), :class=>"remove" %>
         </td>
       </tr>
     <%end%>

@@ -30,7 +30,7 @@
             <%= link_to "Activate",change_status_organizations_path(:id => organization.id, :key => "active" ) %> |
           <%end%>
           <%= link_to "Statistics",statistics_organizations_path(:id => organization.id ) %> |
-          <%= link_to "Delete" %>
+          <%= link_to "Delete",delete_organization_organizations_path(:id => organization.id ) %>
         </td>
       </tr>
     <%end%>

@@ -30,9 +30,15 @@ class OrganizationsController < ApplicationController
   end
 
   def change_status
-    @organization = User.find_by_id(params[:id])
-    @organization.activate! unless @organization.activation_code.nil?
-    @organization.update_attribute(:status_id, Status.find_by_title(params[:key].to_s).id)
+    organization = User.find_by_id(params[:id])
+    organization.activate! unless organization.activation_code.nil?
+    organization.update_attribute(:status_id, Status.find_by_title(params[:key].to_s).id)
+    redirect_to :action => :list
+  end
+
+  def delete_organization
+    organization = User.find_by_id(params[:id])
+    organization.destroy
     redirect_to :action => :list
   end
 

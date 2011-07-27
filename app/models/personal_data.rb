@@ -1,5 +1,9 @@
 class PersonalData < ActiveRecord::Base
   belongs_to :registrant, :polymorphic => true
+
+  def full_name
+    "#{self.first_name} #{self.middle_name} #{self.last_name}"
+  end
 end
 
 

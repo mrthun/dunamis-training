@@ -65,6 +65,15 @@ Training::Application.routes.draw do
     end
   end
 
+  resource :timesheets do
+    collection do
+      get "list","details","delete"
+      
+      #      get 'details/:id', :to  => "jobs#details", :as => :details
+      #      get 'update_job/:id/:days/:key', :to  => "jobs#update_job", :as => :update_job
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

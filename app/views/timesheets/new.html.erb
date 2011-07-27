@@ -1,0 +1,81 @@
+<h1>New Timesheet</h1>
+<%= error_messages_for :timesheet %>
+<%= form_for :timesheet, :url => timesheets_path, :html => { :multipart  => true } do |f| -%>
+  <p>
+    <%= label_tag 'Client' %><br/>
+    <%= select_tag "client_id", options_from_collection_for_select(@organization.clients, :id, :name ) %>
+  </p>
+
+  <p>
+    <%= label_tag 'Registrant' %><br/>
+    <%= select_tag "registrant_id", options_from_collection_for_select(@organization.registrants, :id, :email ) %>
+  </p>
+
+  <p>
+    <%= label_tag 'Facility' %><br/>
+    <%= f.text_field :facility  %>
+  </p>
+
+  <p>
+    <%= label_tag 'Date( end of week )' %><br/>
+    <%= f.date_select :end_of_week  %>
+  </p>
+
+  <%= fields_for :sunday, @sunday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s, :day => "sunday" } %>
+  <% end %>
+
+  <%= fields_for :monday, @monday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s, :day => "monday" } %>
+  <% end %>
+
+  <%= fields_for :teusday, @teusday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "teusday"} %>
+  <% end %>
+
+  <%= fields_for :wednesday, @wednesday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "wednesday"} %>
+  <% end %>
+
+  <%= fields_for :thursday, @thursday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "thursday"} %>
+  <% end %>
+
+  <%= fields_for :friday, @friday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "friday"} %>
+  <% end %>
+
+  <%= fields_for :saturday, @saturday do |s| %>
+    <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "saturday"} %>
+  <% end %>
+
+  <p>
+    <%= label_tag 'Total Hours' %><br/>
+    <%= f.text_field :total_hours, :value => "0"  %>
+  </p>
+
+  <p>
+    <%= label_tag 'Status' %><br/>
+    <%= select( "timesheet", "status", { "Approved" => "approved", "Pending" => "pending"}) %>
+  </p>
+
+  <h3>Add Timesheet Images</h3>
+  <div id="file">
+    <%= file_field_tag "images[]" %><%= link_to "Add Another","javascript:void(0)",:id=>"add_another" %><br />
+  </div>
+
+
+  <p><%= submit_tag 'Create' %></p>
+<% end -%>
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $("#add_another").click(function(){
+      $('#file').append(function() {
+        return "<div id='file'><input id='images_' name='images[]' type='file'><br></div>";
+      });
+    });
+    
+  });
+</script>
+

@@ -1,2 +1,2 @@
-<h1><%= @registrant.personal_data.present? ? @registrant.personal_data.first_name : @registrant.email %>'s Assigned Jobs History</h1>
+<h1><%= @registrant.display_name %>'s Assigned Jobs History</h1>
 <%= render :partial => "/jobs/list.html", :locals => {:jobs => @jobs}  %>

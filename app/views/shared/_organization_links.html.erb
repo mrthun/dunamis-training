@@ -13,6 +13,13 @@
     </div>
     <div class="tabs_right"></div>
   </div>
+  <div class="tabs <%= 'active' if request.request_uri  == "/timesheets/list" %>">
+    <div class="tabs_left"></div>
+    <div class="tabs_center">
+      <%= link_to "Timecards", list_timesheets_path(:subdomain => subdomain) %>
+    </div>
+    <div class="tabs_right"></div>
+  </div>
   <div class="tabs <%= 'active' if request.request_uri  == "/users/list_employees" %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">

@@ -40,9 +40,14 @@ class User < ActiveRecord::Base
   has_one :billing_data, :as => :client, :dependent => :destroy
   has_many :client_locations, :as => :client, :dependent => :destroy
   has_many :employees, :as => :organization, :class_name => "User", :dependent => :destroy
+
   has_many :created_jobs, :as => :creator, :class_name => "Job", :dependent => :destroy
   has_many :requested_jobs, :as => :client, :class_name => "Job", :dependent => :destroy
   has_many :assigned_jobs, :as => :registrant, :class_name => "Job", :dependent => :destroy
+
+  has_many :created_timesheets, :as => :creator, :class_name => "Timesheet", :dependent => :destroy
+  has_many :timesheets_for, :as => :client, :class_name => "Timesheet", :dependent => :destroy
+  has_many :timesheets_of, :as => :registrant, :class_name => "Timesheet", :dependent => :destroy
 
   has_one :profile_data, :as => :scheduler, :dependent => :destroy
 
@@ -75,8 +80,20 @@ class User < ActiveRecord::Base
     activation_code.nil?
   end
 
-  def is_active?
-    status.title.eql?("active")
+  def display_name
+    case self.roles.first.title
+    when "admin"
+      name = self.email.split("@")[0]
+    when "organization"
+      name = self.name
+    when "registrant"
+      name = self.personal_data.present? ? self.personal_data.full_name : self.email.split("@")[0]
+    when "scheduler"
+      name = self.profile_data.present? ? self.profile_data.full_name : self.email.split("@")[0]
+    else
+      name = self.email.split("@")[0]
+    end
+    return name
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

@@ -1,2 +1,2 @@
-<h1><%= @scheduler.profile_data.present? ? @scheduler.profile_data.first_name : @scheduler.email %>'s scheduled Jobs History</h1>
+<h1><%= @scheduler.display_name %>'s scheduled Jobs History</h1>
 <%= render :partial => "/jobs/list.html", :locals => {:jobs => @jobs}  %>

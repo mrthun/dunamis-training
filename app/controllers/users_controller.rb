@@ -66,13 +66,13 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.roles << Role.find_by_id(params[:role_id])
     success = @user && @user.save
-
+    @roles = Role.all.select{ |role| role.title == "scheduler" || role.title == "registrant" }
     if success && @user.errors.empty?
       flash[:notice] = "An email has been sent to the created emplyee with activation information."
       redirect_to :action => :list_employees
     else
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-      render :action => 'new'
+      render :action => 'new_employee'
     end
   end
 

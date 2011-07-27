@@ -1,4 +1,4 @@
-<h1>Schedule Job for <%= @registrant.personal_data.first_name %></h1>
+<h1>Schedule Job for <%= @registrant.display_name %></h1>
 <% form_for :job,@job, :url => jobs_path do |j| %>
   <%= hidden_field_tag :registrant_id, @registrant.id  %>
   facility : <%= j.text_field:facility, :value => @service %><br /><br />

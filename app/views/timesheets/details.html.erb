@@ -1,0 +1,37 @@
+<h1>Timesheet Details</h1><br />
+Client: <%= @timesheet.client.display_name %><br /><br />
+Registrant: <%= @timesheet.registrant.display_name %><br /><br />
+Facility: <%= @timesheet.facility %><br /><br />
+WeekEnd: <%= @timesheet.end_of_week.strftime("%d/%m/%Y") %><br /><br />
+Status: <%= @timesheet.status %><br /><br />
+
+<table>
+  <tr>
+    <th>Day</th>
+    <th>Break Start</th>
+    <th>Break End</th>
+    <th>Time In</th>
+    <th>Time Out</th>
+    <th>Hours</th>
+  </tr>
+  <% @timesheet.timesheet_entries.each do |entry| %>
+    <tr>
+      <td><%= entry.day %></td>
+      <td><%= entry.break_start.strftime("%H:%M") %></td>
+      <td><%= entry.break_end.strftime("%H:%M") %></td>
+      <td><%= entry.time_in.strftime("%H:%M") %></td>
+      <td><%= entry.time_out.strftime("%H:%M") %></td>
+      <td><%= entry.hours %></td>
+    </tr>
+  <%end%>
+</table>
+<br />
+Total Hours: <%= @timesheet.total_hours %><br /><br />
+
+<h2>Timesheet Images</h2>
+<% unless @timesheet.timesheet_images.blank? %>
+  <% @timesheet.timesheet_images.each do |img| %>
+    <%= image_tag(img.image.url(:thumb))%>
+  <%end%>
+<%end%>
+

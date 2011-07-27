@@ -1,5 +1,5 @@
 class Asset < ActiveRecord::Base
-  has_attached_file :asset
+  has_attached_file :asset, :styles => { :logo => "217x56>"}
   belongs_to :user
 end
 

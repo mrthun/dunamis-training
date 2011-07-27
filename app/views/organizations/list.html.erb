@@ -15,7 +15,7 @@
     </tr>
     <% @organizations.each do |organization| %>
       <tr>
-        <td><%= organization.name %></td>
+        <td><%= organization.display_name %></td>
         <td><%= organization.email %></td>
         <td><%= "http://#{organization.subdomain.name}.#{request.host_with_port}/" %></td>
         <td><%= organization.status.title %></td>

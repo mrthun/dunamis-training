@@ -1,6 +1,6 @@
 <div class="logo">
   <% if @organization.present? %>
-    <% link = @organization.has_asset?("logo") ?  image_tag(@organization.asset("logo").asset.url , :size => "217x56" ) : @organization.subdomain.name %>
+    <% link = @organization.has_asset?("logo") ?  image_tag(@organization.asset("logo").asset.url(:logo)) : @organization.subdomain.name %>
     <h1><%= link_to  link , root_url(:subdomain => @organization.subdomain.name ) %></h1>
   <%else%>
     <h1><%= link_to image_tag("logo.png"), root_url(:subdomain => false ) %></h1>
@@ -11,7 +11,7 @@
 
 <ul class="topRightNav">
   <% if logged_in? %>
-    <li class="bdrLnone"><%= current_user.email %>( <%= current_user.roles.first.title %> )</li>
+    <li class="bdrLnone"><%= current_user.display_name %>( <%= current_user.roles.first.title %> )</li>
     <br />
     <li><%= link_to "SignOut", logout_path(:subdomain => subdomain) %></li>
     <li><a href="#">Account</a></li>

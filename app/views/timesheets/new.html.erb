@@ -13,7 +13,7 @@
       <%=  current_user.display_name  %>
       <%= hidden_field_tag :registrant_id, current_user.id %>
     <%else%>
-      <%= select_tag "registrant_id", options_from_collection_for_select(@organization.registrants, :id, :email ) %>
+      <%= select_tag "registrant_id", options_from_collection_for_select(@organization.registrants, :id, :display_name ) %>
     <%end%>
   </p>
 
@@ -75,7 +75,7 @@
 
   <p>
     <%= label_tag 'Total Hours' %><br/>
-    <%= f.text_field :total_hours, :value => "0:00" , :id => "total_hours" %>
+    <%= f.text_field :total_hours, :value => "00:00" , :id => "total_hours" %>
   </p>
 
   <p>

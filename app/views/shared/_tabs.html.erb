@@ -2,13 +2,13 @@
 <% if logged_in? %>
   <% if @organization.present? %>
     <% if  current_user.is_organization? %>
-      <%= render :partial => "/shared/organization_links", :locals  => { :subdomain => subdomain } %>
+      <%= render :partial => "/shared/organization_links", :locals  => { :subdomain => @subdomain } %>
     <% elsif  current_user.is_registrant? %>
-      <%= render :partial => "/shared/registrant_links", :locals  => { :subdomain => subdomain } %>
+      <%= render :partial => "/shared/registrant_links", :locals  => { :subdomain => @subdomain } %>
     <% elsif  current_user.is_scheduler? %>
-      <%= render :partial => "/shared/scheduler_links", :locals  => { :subdomain => subdomain } %>
+      <%= render :partial => "/shared/scheduler_links", :locals  => { :subdomain => @subdomain } %>
     <%end%>
   <%else%>
-    <%= render :partial => "/shared/admin_links", :locals  => { :subdomain => subdomain } %>
+    <%= render :partial => "/shared/admin_links", :locals  => { :subdomain => @subdomain } %>
   <%end%>
 <%end%>

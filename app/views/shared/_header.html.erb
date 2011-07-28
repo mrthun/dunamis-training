@@ -7,17 +7,15 @@
   <%end%>
 </div>
 
-<% subdomain = @organization.present? ? @organization.subdomain.name : false %>
-
 <ul class="topRightNav">
   <% if logged_in? %>
     <li class="bdrLnone"><%= current_user.display_name %>( <%= current_user.roles.first.title %> )</li>
     <br />
-    <li><%= link_to "SignOut", logout_path(:subdomain => subdomain) %></li>
+    <li><%= link_to "SignOut", logout_path(:subdomain => @subdomain) %></li>
     <li><a href="#">Account</a></li>
     <li class="bdrLnone"><a href="#">Help</a></li>
   <%else%>
-    <li><%= link_to "SignUp", signup_url(:subdomain => subdomain) %></li>
-    <li class="bdrLnone"><a href="#"><%= link_to "SignIn", login_url(:subdomain => subdomain) %></a></li>
+    <li><%= link_to "SignUp", signup_url(:subdomain => @subdomain) %></li>
+    <li class="bdrLnone"><a href="#"><%= link_to "SignIn", login_url(:subdomain => @subdomain) %></a></li>
   <%end%>
 </ul>

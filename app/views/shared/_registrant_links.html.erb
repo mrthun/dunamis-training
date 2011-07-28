@@ -1,30 +1,29 @@
-<% subdomain = @organization.present? ? @organization.subdomain.name : false %>
 <div class="tabs_wrapper">
   <div class="tabs <%= 'active' if request.request_uri  == "/" %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
-      <%= link_to "Home", root_url(:subdomain => subdomain) %>
+      <%= link_to "Home", root_url(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
   <div class="tabs <%= 'active' if (params[:controller] == "registrants" && params[:action] == "profile") %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
-      <%= link_to "Parameters", profile_registrants_path(:r_id => current_user.id, :subdomain => subdomain) %>
+      <%= link_to "Parameters", profile_registrants_path(:r_id => current_user.id, :subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
   <div class="tabs <%= 'active' if request.request_uri  == "/timesheets/list" %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">
-      <%= link_to "Timecards", list_timesheets_path(:subdomain => subdomain) %>
+      <%= link_to "Timecards", list_timesheets_path(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
   <div class="tabs <%= 'active' if (params[:controller] == "registrants" && params[:action] == "jobs_history") %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
-      <%= link_to "Reports", jobs_history_registrants_path(:r_id => current_user.id, :subdomain => subdomain) %>
+      <%= link_to "Reports", jobs_history_registrants_path(:r_id => current_user.id, :subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>

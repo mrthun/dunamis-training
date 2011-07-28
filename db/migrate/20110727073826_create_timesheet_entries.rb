@@ -3,10 +3,10 @@ class CreateTimesheetEntries < ActiveRecord::Migration
     create_table :timesheet_entries do |t|
       t.column :timesheet_id, :integer
       t.column :day, :string
-      t.column :break_start, :datetime
-      t.column :break_end, :datetime
-      t.column :time_in, :datetime
-      t.column :time_out, :datetime
+      t.column :break_start, :text
+      t.column :break_end, :text
+      t.column :time_in, :text
+      t.column :time_out, :text
       t.column :hours, :integer
       t.timestamps
     end

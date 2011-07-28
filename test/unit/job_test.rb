@@ -8,6 +8,7 @@ class JobTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: jobs

@@ -7,6 +7,7 @@ class ProfileDataTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: profile_data

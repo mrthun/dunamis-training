@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def set_organization_subdomain
     if is_subdomian?(request.subdomain)
       if logged_in? && current_user.is_admin?
-        redirect_to(request.protocol + request.domain + (request.port.nil? ? '' : ":#{request.port}"))
+        redirect_to(request.protocol + request.domain + (request.port.nil? ? '' : ":#{request.port}")+ request.request_uri)
       else
         @organization = User.find_by_name(request.subdomain)
         unless @organization.present?

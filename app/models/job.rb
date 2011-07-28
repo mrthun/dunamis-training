@@ -7,6 +7,7 @@ class Job < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: jobs

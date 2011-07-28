@@ -11,6 +11,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: facility_types

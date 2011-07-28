@@ -6,9 +6,15 @@
     <%= select_tag "client_id", options_from_collection_for_select(@organization.clients, :id, :name ) %>
   </p>
 
+
   <p>
     <%= label_tag 'Registrant' %><br/>
-    <%= select_tag "registrant_id", options_from_collection_for_select(@organization.registrants, :id, :email ) %>
+    <% if current_user.is_registrant? %>
+      <%=  current_user.display_name  %>
+      <%= hidden_field_tag :registrant_id, current_user.id %>
+    <%else%>
+      <%= select_tag "registrant_id", options_from_collection_for_select(@organization.registrants, :id, :email ) %>
+    <%end%>
   </p>
 
   <p>

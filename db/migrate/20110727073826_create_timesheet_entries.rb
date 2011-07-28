@@ -7,7 +7,7 @@ class CreateTimesheetEntries < ActiveRecord::Migration
       t.column :break_end, :text
       t.column :time_in, :text
       t.column :time_out, :text
-      t.column :hours, :integer
+      t.column :hours, :text
       t.timestamps
     end
   end

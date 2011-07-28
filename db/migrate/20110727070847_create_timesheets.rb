@@ -10,7 +10,7 @@ class CreateTimesheets < ActiveRecord::Migration
       t.text :facility
       t.string :status
       t.datetime :end_of_week
-      t.integer :total_hours
+      t.text :total_hours
       t.timestamps
     end
   end

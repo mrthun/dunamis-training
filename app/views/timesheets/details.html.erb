@@ -17,10 +17,10 @@ Status: <%= @timesheet.status %><br /><br />
   <% @timesheet.timesheet_entries.each do |entry| %>
     <tr>
       <td><%= entry.day %></td>
-      <td><%= entry.break_start.strftime("%H:%M") %></td>
-      <td><%= entry.break_end.strftime("%H:%M") %></td>
-      <td><%= entry.time_in.strftime("%H:%M") %></td>
-      <td><%= entry.time_out.strftime("%H:%M") %></td>
+      <td><%= entry.break_start %></td>
+      <td><%= entry.break_end %></td>
+      <td><%= entry.time_in %></td>
+      <td><%= entry.time_out %></td>
       <td><%= entry.hours %></td>
     </tr>
   <%end%>

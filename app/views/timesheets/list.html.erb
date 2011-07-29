@@ -1,5 +1,5 @@
 <br /><%= link_to "Add New Timesheet", new_timesheets_path %><br /><br />
-<h1>All Timesheets List</h1>
+<h1>Timesheets</h1>
 <% unless @timesheets.blank? %>
   <table>
     <tr>
@@ -22,7 +22,10 @@
         <td>
           <%= link_to 'View Details', details_timesheets_path(:id => sheet.id ) %> |
           <% unless current_user.is_registrant? %>
+            <%= link_to 'Edit', edit_timesheets_path(:id => sheet.id) %> |
             <%= link_to 'Delete', delete_timesheets_path(:id => sheet.id) %>
+          <%else%>
+            <%= link_to 'Edit', edit_timesheets_path(:id => sheet.id) if current_user.timesheets_of.include?(sheet)%>
           <%  end %>
         </td>
       </tr>

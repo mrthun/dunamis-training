@@ -43,10 +43,12 @@ class JobsController < ApplicationController
 
   def list_registrants
     set_active_tab("scheduling")
-    @result = @organization.filter_registrants(params[:service],params[:location])
-    @registrants = @result[:registrants]
-    @service = @result[:service]
-    @location = @result[:location]
+    if params[:service].present? && params[:location].present?
+      @result = @organization.filter_registrants(params[:service],params[:location])
+      @registrants = @result[:registrants]
+      @service = @result[:service]
+      @location = @result[:location]
+    end
     render :json => {:success => true, :html => render_to_string(:partial => "/jobs/list_registrants.html") }.to_json
   end
 

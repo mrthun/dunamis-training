@@ -90,6 +90,8 @@ class User < ActiveRecord::Base
       name = self.personal_data.present? ? self.personal_data.full_name : self.email.split("@")[0]
     when "scheduler"
       name = self.profile_data.present? ? self.profile_data.full_name : self.email.split("@")[0]
+    when "client"
+      name = self.name
     else
       name = self.email.split("@")[0]
     end
@@ -165,7 +167,11 @@ class User < ActiveRecord::Base
     registrants = self.registrants.select do |r|
       r.status.title == "active" && r.skill.occupation_type.title.include?("#{service.downcase}") && @loc = r.work_locations.detect{|loc| loc.name.include?("#{location.downcase}") && loc.do_not_schedule == false }
     end
-    return { :registrants => registrants, :service => registrants.first.skill.occupation_type.title, :location => @loc.name }
+    if registrants.present?
+      return { :registrants => registrants, :service => registrants.first.skill.occupation_type.title, :location => @loc.name }
+    else
+      return { :registrants => registrants, :service => service, :location => location }
+    end
   end
 
   def self.employees

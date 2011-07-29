@@ -8,15 +8,15 @@ Status: <%= @timesheet.status %><br /><br />
 <table>
   <tr>
     <th>Day</th>
-    <th>Break Start</th>
-    <th>Break End</th>
-    <th>Time In</th>
-    <th>Time Out</th>
+    <th>BreakStart</th>
+    <th>BreakEnd</th>
+    <th>TimeIn</th>
+    <th>TimeOut</th>
     <th>Hours</th>
   </tr>
   <% @timesheet.timesheet_entries.each do |entry| %>
     <tr>
-      <td><%= entry.day %></td>
+      <td><%= entry.day.capitalize %></td>
       <td><%= entry.break_start %></td>
       <td><%= entry.break_end %></td>
       <td><%= entry.time_in %></td>
@@ -34,4 +34,11 @@ Total Hours: <%= @timesheet.total_hours %><br /><br />
     <%= image_tag(img.image.url(:thumb))%>
   <%end%>
 <%end%>
+<br /><br />
 
+<% unless current_user.is_registrant? %>
+  <%= link_to 'Edit', edit_timesheets_path(:id => @timesheet.id) %> |
+  <%= link_to 'Delete', delete_timesheets_path(:id => @timesheet.id) %>
+<%else%>
+  <%= link_to 'Edit', edit_timesheets_path(:id => @timesheet.id) if current_user.timesheets_of.include?(@timesheet)%>
+<%  end %>

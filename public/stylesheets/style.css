@@ -29,7 +29,8 @@ img{
   border:none;
 }
 a{
-  color:#000000;
+  color:#4874a2;
+  font-weight: bolder;
   text-decoration:none;
 }
 .wrrapper{
@@ -185,6 +186,11 @@ a{
 .contentHolder img{
   float:left;
   margin-left:17px;
+}
+.container{
+  width:100%;
+  margin: 0 auto;
+  padding: 10px 20px;
 }
 .footer{
   float:left;

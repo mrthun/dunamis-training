@@ -1,6 +1,11 @@
 <h1>Organizations Reports</h1>
-Organization: <%= select_tag  "organization_id", options_from_collection_for_select(@organizations, :id, :name ) %><br /><br />
-
+Organization:
+<select name="organization_id" id="organization_id" >
+  <option value=0">Select Organization</option>
+  <% @organizations.each do |org| %>
+    <option value="<%= org.id %>"><%= org.name %></option>
+  <%end%>
+</select>
 <div id="report">
   <%= render :partial  => "/organizations/report" %>
 </div>

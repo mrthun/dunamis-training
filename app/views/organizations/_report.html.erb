@@ -1,10 +1,10 @@
-<% if @organization.present? %>
+<% if @org.present? %>
   <h2>Associated Clients</h2>
-  <%= render :partial => "/clients/list.html", :locals => {:clients => @organization.clients } %>
+  <%= render :partial => "/clients/list.html", :locals => {:clients => @org.clients } %>
   <h2>Schedulers</h2>
-  <%= render :partial => "/schedulers/list.html", :locals => {:schedulers => @organization.schedulers} %>
+  <%= render :partial => "/schedulers/list.html", :locals => {:schedulers => @org.schedulers} %>
   <h2>Registrants</h2>
-  <%= render :partial => "/registrants/list.html", :locals => {:registrants => @organization.registrants} %>
+  <%= render :partial => "/registrants/list.html", :locals => {:registrants => @org.registrants} %>
 <%else%>
   Please select the organization from the list to view the reports for.
 <%end%>

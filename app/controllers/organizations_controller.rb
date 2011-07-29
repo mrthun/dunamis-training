@@ -62,7 +62,7 @@ class OrganizationsController < ApplicationController
   end
 
   def history
-    @organization = User.find_by_id(params[:id])
+    @org = User.find_by_id(params[:id]) 
     render :json => {:success => true, :html => render_to_string(:partial => "/organizations/report.html") }.to_json
   end
 

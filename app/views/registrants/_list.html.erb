@@ -11,7 +11,7 @@
         <td><%= registrant.status.title %></td>
         <td>
           <% if current_user.is_admin? || current_user.is_organization? %>
-            <%= link_to "View Jobs History",jobs_history_registrants_path(:id => registrant.id ) %>
+            <%= link_to "View Jobs History",jobs_history_registrants_path(:r_id => registrant.id ) %>
           <%end%>
         </td>
       </tr>

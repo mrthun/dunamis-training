@@ -15,5 +15,6 @@
   <%= f.text_field :time_out,{:id => "#{day}", :class => "entry"} %>
 </td>
 <td>
-  <%= f.text_field :hours, :id => "hours_#{day}", :class => "hours" %>
+  <% value = resourse.hours.present? ? resourse.hours : "00:00" %>
+  <%= f.text_field :hours, :value => value, :id => "hours_#{day}", :class => "hours" %>
 </td>

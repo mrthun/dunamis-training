@@ -35,37 +35,37 @@
   </tr>
   <tr>
     <%= fields_for :sunday, @sunday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s, :day => "sunday" } %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s, :day => "sunday", :resourse => @sunday  } %>
     <% end %>
   </tr>
   <tr>
     <%= fields_for :monday, @monday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s, :day => "monday" } %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s, :day => "monday", :resourse => @monday } %>
     <% end %>
   </tr>
   <tr>
     <%= fields_for :teusday, @teusday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "teusday"} %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "teusday", :resourse => @teusday } %>
     <% end %>
   </tr>
   <tr>
     <%= fields_for :wednesday, @wednesday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "wednesday"} %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "wednesday", :resourse => @wednesday } %>
     <% end %>
   </tr>
   <tr>
     <%= fields_for :thursday, @thursday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "thursday"} %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "thursday", :resourse => @thursday } %>
     <% end %>
   </tr>
   <tr>
     <%= fields_for :friday, @friday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "friday"} %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "friday", :resourse => @friday } %>
     <% end %>
   </tr>
   <tr>
     <%= fields_for :saturday, @saturday do |s| %>
-      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "saturday"} %>
+      <%= render :partial => "/timesheets/entry", :locals => { :f => s , :day => "saturday" , :resourse => @saturday } %>
     <% end %>
   </tr>
 </table>

@@ -10,3 +10,6 @@ function hideShowOrg(element){
     document.getElementById("org_name").style.display = "none";
   }
 }
+$(document).ready(function() {
+  setTimeout("$('.message').hide()",10000);
+});

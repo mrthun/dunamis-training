@@ -219,4 +219,16 @@ input[type=submit]{
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+.notice {
+  background: #fff6bf;
+  color: green;
+  border: 1px solid #ffd324;
+  padding: 10px 50px;
+}
+.error {
+  background: pink;
+  color: red;
+  border: 1px solid red;
+  padding: 10px 50px;
+}
 

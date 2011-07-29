@@ -4,6 +4,7 @@ class JobsController < ApplicationController
   access_control :DEFAULT => 'scheduler'
 
   def list
+    set_active_tab("scheduling")
     @jobs = current_user.created_jobs
     if request.xhr?
       @sent_data = []
@@ -19,11 +20,13 @@ class JobsController < ApplicationController
   end
 
   def details
+    set_active_tab("scheduling")
     @job = Job.find_by_id(params[:id])
     render :json => {:success => true, :html => render_to_string(:partial => "/jobs/details.html") }.to_json
   end
 
   def update_job
+    set_active_tab("scheduling")
     @job = Job.find_by_id(params[:id])
     if params[:key] == "date"
       @job.update_attribute(:date, @job.date + (params[:days].to_i*24).hours )
@@ -35,10 +38,11 @@ class JobsController < ApplicationController
   end
 
   def new
-    
+    set_active_tab("scheduling")
   end
 
   def list_registrants
+    set_active_tab("scheduling")
     @result = @organization.filter_registrants(params[:service],params[:location])
     @registrants = @result[:registrants]
     @service = @result[:service]
@@ -47,6 +51,7 @@ class JobsController < ApplicationController
   end
 
   def schedule
+    set_active_tab("scheduling")
     @clients = @organization.clients
     @registrant = User.find_by_id(params[:id])
     @service = params[:service]
@@ -55,6 +60,7 @@ class JobsController < ApplicationController
   end
 
   def create
+    set_active_tab("scheduling")
     @job = Job.new(params[:job])
     @client = User.find_by_id(params[:client_id])
     @registrant = User.find_by_id(params[:registrant_id])
@@ -77,6 +83,7 @@ class JobsController < ApplicationController
   end
 
   def delete
+    set_active_tab("scheduling")
     @job = Job.find_by_id(params[:id])
     @job.destroy
     flash[:notice]  = "Job was successfully deleted"

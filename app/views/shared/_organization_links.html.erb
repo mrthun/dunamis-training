@@ -1,40 +1,40 @@
 <div class="tabs_wrapper">
-  <div class="tabs <%= 'active' if request.request_uri  == "/" %>" >
+  <div class="tabs <%= 'active' if is_active_tab?("home") %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Home",root_url(:subdomain => @organization.subdomain.name )%>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/home/configurations" %>">
+  <div class="tabs <%= 'active' if is_active_tab?("configurations") %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Configurations", configurations_home_index_url(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/timesheets/list" %>">
+  <div class="tabs <%= 'active' if is_active_tab?("timecards") %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Timecards", list_timesheets_path(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/users/list_employees" %>">
+  <div class="tabs <%= 'active' if is_active_tab?("hr") %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "HR", list_employees_users_path(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/organizations/reports" %>">
+  <div class="tabs <%= 'active' if is_active_tab?("reports") %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Reports", reports_organizations_url(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/organizations/statistics" %>">
+  <div class="tabs <%= 'active' if is_active_tab?("statistics") %>">
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Statistics", statistics_organizations_url(:subdomain => @subdomain) %>

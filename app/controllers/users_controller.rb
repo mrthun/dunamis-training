@@ -54,15 +54,18 @@ class UsersController < ApplicationController
   end
 
   def list_employees
+    set_active_tab("hr")
     @employees = User.employees
   end
 
   def new_employee
+    set_active_tab("hr")
     @user = User.new
     @roles = Role.all.select{ |role| role.title == "scheduler" || role.title == "registrant" }
   end
 
   def create_employee
+    set_active_tab("hr")
     @user = User.new(params[:user])
     @user.roles << Role.find_by_id(params[:role_id])
     success = @user && @user.save
@@ -77,6 +80,7 @@ class UsersController < ApplicationController
   end
 
   def change_status
+    set_active_tab("hr")
     @employee = User.find_by_id(params[:id])
     @employee.activate!
     flash[:notice] = "Employee was activated."
@@ -84,6 +88,7 @@ class UsersController < ApplicationController
   end
 
   def delete_employee
+    set_active_tab("hr")
     @employee = User.find_by_id(params[:id])
     @employee.destroy
     flash[:notice] = "Employee was removed."

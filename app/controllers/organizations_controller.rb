@@ -8,14 +8,17 @@ class OrganizationsController < ApplicationController
 
 
   def list
+    set_active_tab("organizations")
     @organizations = User.organizations
   end
   
   def new
+    set_active_tab("organizations")
     @org = User.new
   end
 
   def create
+    set_active_tab("organizations")
     @org = User.new(params[:org])
     @org.roles << Role.find_by_title("organization")
     @org.subdomain = Subdomain.new :name => params[:org][:name].downcase
@@ -38,6 +41,7 @@ class OrganizationsController < ApplicationController
   end
 
   def change_status
+    set_active_tab("organizations")
     organization = User.find_by_id(params[:id])
     organization.activate! unless organization.activation_code.nil?
     organization.update_attribute(:status_id, Status.find_by_title(params[:key].to_s).id)
@@ -45,28 +49,34 @@ class OrganizationsController < ApplicationController
   end
 
   def delete_organization
+    set_active_tab("organizations")
     organization = User.find_by_id(params[:id])
     organization.destroy
     redirect_to :action => :list
   end
 
   def dashboard
-
+    set_active_tab("home")
   end
 
   def all_reports
+    set_active_tab("reports")
     @organizations = User.organizations
   end
 
   def reports
+    set_active_tab("reports")
+    @org = @organization
   end
 
   def history
+    set_active_tab("reports")
     @org = User.find_by_id(params[:id]) 
     render :json => {:success => true, :html => render_to_string(:partial => "/organizations/report.html") }.to_json
   end
 
   def statistics
+    current_user.is_admin? ?  set_active_tab("reports") : set_active_tab("statistics")
     @org = params[:id].present? ? User.find_by_id(params[:id]) : @organization
   end
 

@@ -33,5 +33,9 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "You don't have privileges to access this action"
     return render :template => '/shared/403'
   end
+
+  def set_active_tab(tab)
+    @active_tab = tab
+  end
     
 end

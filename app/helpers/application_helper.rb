@@ -11,4 +11,8 @@ module ApplicationHelper
     subdomain.present? && subdomain != "www"
   end
 
+  def is_active_tab?(tab)
+    @active_tab == tab
+  end
+
 end

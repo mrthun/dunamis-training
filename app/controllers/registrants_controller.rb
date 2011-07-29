@@ -1,13 +1,14 @@
 class RegistrantsController < ApplicationController
 
   before_filter :login_required, :set_registrant
-  access_control :jobs_history => "( admin | registrant | admin )",
+  access_control :jobs_history => "( admin | registrant | organization )",
     [:profile, :create_personal_data, :create_skill, :create_preference,
     :create_pay, :create_credential, :create_location, :remove_location,
     :upload_asset ] => "( organization | registrant )"
 
 
   def profile
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if request.xhr? && params[:link].present?
       case params[:link]
       when "personal_data"
@@ -31,6 +32,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create_personal_data
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if @registrant.personal_data.present?
       @resource = @registrant.personal_data
       success = @resource.update_attributes(params[:resource])
@@ -46,6 +48,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create_skill
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if @registrant.skill.present?
       @resource = @registrant.skill
       success = @resource.update_attributes(params[:resource])
@@ -61,6 +64,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create_preference
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if @registrant.preference.present?
       @resource = @registrant.preference
       success = @resource.update_attributes(params[:resource])
@@ -77,6 +81,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create_pay
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if @registrant.pay.present?
       @resource = @registrant.pay
       success = @resource.update_attributes(params[:resource])
@@ -93,6 +98,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create_credential
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if @registrant.credential.present?
       @resource = @registrant.credential
       success = @resource.update_attributes(params[:resource])
@@ -110,6 +116,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create_location
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     @resource = WorkLocation.new(params[:resource])
     @resource.registrant = @registrant
     success = @resource.save
@@ -122,6 +129,7 @@ class RegistrantsController < ApplicationController
   end
 
   def remove_location
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     @loc = WorkLocation.find_by_id(params[:id])
     @locations = @registrant.work_locations
     if @loc.destroy
@@ -132,6 +140,7 @@ class RegistrantsController < ApplicationController
   end
 
   def upload_asset
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if params[:asset].present?
       if @registrant.has_asset?(params[:key])
         @registrant.remove_asset(params[:key])
@@ -148,6 +157,7 @@ class RegistrantsController < ApplicationController
   end
 
   def jobs_history
+    set_active_tab("reports")
     @jobs = @registrant.assigned_jobs
   end
 

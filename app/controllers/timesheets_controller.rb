@@ -5,6 +5,7 @@ class TimesheetsController < ApplicationController
     :delete => "( organization | scheduler )"
 
   def list
+    set_active_tab("timecards")
     if current_user.is_registrant?
       @timesheets = current_user.timesheets_of
     else
@@ -13,10 +14,12 @@ class TimesheetsController < ApplicationController
   end
 
   def details
+    set_active_tab("timecards")
     @timesheet = Timesheet.find_by_id(params[:id])
   end
   
   def new
+    set_active_tab("timecards")
     @timesheet = Timesheet.new
     @sunday = TimesheetEntry.new
     @monday = TimesheetEntry.new
@@ -29,6 +32,7 @@ class TimesheetsController < ApplicationController
 
 
   def create
+    set_active_tab("timecards")
     @timesheet = Timesheet.new(params[:timesheet])
     @timesheet.creator = current_user
     @timesheet.client = User.find_by_id(params[:client_id])
@@ -51,14 +55,15 @@ class TimesheetsController < ApplicationController
   end
 
   def edit
-
+    set_active_tab("timecards")
   end
 
   def update
-
+    set_active_tab("timecards")
   end
 
   def delete
+    set_active_tab("timecards")
     @timesheet = Timesheet.find_by_id(params[:id])
     @timesheet.destroy
     flash[:notice]  = "Timesheet was deleted."

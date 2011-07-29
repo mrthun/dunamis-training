@@ -8,14 +8,17 @@ class ClientsController < ApplicationController
   
 
   def list
+    set_active_tab("clients")
     @clients = User.clients
   end
 
   def new
+    set_active_tab("clients")
     @user = User.new
   end
 
   def create
+    set_active_tab("clients")
     @user = User.new(params[:user])
     @user.roles << Role.find_by_title("client")
     @user.organization = @organization
@@ -32,6 +35,7 @@ class ClientsController < ApplicationController
   end
 
   def show
+    set_active_tab("clients")
     if request.xhr? && params[:link].present?
       case params[:link]
       when "basic_data"
@@ -51,6 +55,7 @@ class ClientsController < ApplicationController
   end
 
   def create_basic_data
+    set_active_tab("clients")
     if @client.basic_data.present?
       @resource = @client.basic_data
       success = @resource.update_attributes(params[:resource])
@@ -67,6 +72,7 @@ class ClientsController < ApplicationController
   end
 
   def create_addresses
+    set_active_tab("clients")
     if @client.address.present?
       @resource = @client.address
       success = @resource.update_attributes(params[:resource])
@@ -82,6 +88,7 @@ class ClientsController < ApplicationController
   end
 
   def create_billing
+    set_active_tab("clients")
     if @client.billing_data.present?
       @resource = @client.billing_data
       success = @resource.update_attributes(params[:resource])
@@ -97,6 +104,7 @@ class ClientsController < ApplicationController
   end
 
   def create_location
+    set_active_tab("clients")
     @resource = ClientLocation.new(params[:resource])
     @resource.client = @client
     success = @resource.save
@@ -108,6 +116,7 @@ class ClientsController < ApplicationController
   end
 
   def remove_location
+    set_active_tab("clients")
     @loc = ClientLocation.find_by_id(params[:id])
     @locations = @client.client_locations
     if @loc.destroy
@@ -118,6 +127,7 @@ class ClientsController < ApplicationController
   end
 
   def jobs_history
+    set_active_tab("reports")
     @client = User.find_by_id(params[:id])
     @jobs = @client.requested_jobs
   end

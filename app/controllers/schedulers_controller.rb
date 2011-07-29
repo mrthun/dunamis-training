@@ -4,10 +4,12 @@ class SchedulersController < ApplicationController
     [:profile, :create_profile_data] => "( organization | scheduler )"
 
   def profile
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     @resource = @scheduler.profile_data.present? ? @scheduler.profile_data : ProfileData.new
   end
 
   def create_profile_data
+    current_user.is_organization? ? set_active_tab("hr") : set_active_tab("profile")
     if @scheduler.profile_data.present?
       @resource = @scheduler.profile_data
       @resource.update_attributes(params[:resource])
@@ -21,6 +23,7 @@ class SchedulersController < ApplicationController
   end
 
   def jobs_history
+    set_active_tab("reports")
     @jobs = @scheduler.created_jobs
   end
 

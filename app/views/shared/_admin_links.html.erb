@@ -1,19 +1,19 @@
 <div class="tabs_wrapper">
-  <div class="tabs <%= 'active' if request.request_uri  == "/" %>" >
+  <div class="tabs <%= 'active' if is_active_tab?("home") %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Home", root_url(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/organizations/list" %>" >
+  <div class="tabs <%= 'active' if is_active_tab?("organizations") %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Organizations", list_organizations_url(:subdomain => @subdomain) %>
     </div>
     <div class="tabs_right"></div>
   </div>
-  <div class="tabs <%= 'active' if request.request_uri  == "/organizations/all_reports" %>" >
+  <div class="tabs <%= 'active' if is_active_tab?("reports") %>" >
     <div class="tabs_left"></div>
     <div class="tabs_center">
       <%= link_to "Reports", all_reports_organizations_url(:subdomain => @subdomain) %>

@@ -1,6 +1,8 @@
 class TimesheetsController < ApplicationController
 
   before_filter :login_required
+  access_control [:list, :details, :new, :create, :edit, :update] => "( registrant | scheduler | organization )",
+    :delete => "( organization | scheduler )"
 
   def list
     if current_user.is_registrant?

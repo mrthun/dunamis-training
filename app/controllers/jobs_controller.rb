@@ -11,7 +11,7 @@ class JobsController < ApplicationController
         @sent_data << {:id => job.id,
           :start => "#{job.date.iso8601}",
           :end => "#{(job.date  + job.hours.hours).iso8601}" ,
-          :title =>  "Facility: #{job.facility.titleize}"
+          :title =>  "#{job.facility.titleize}(#{job.hours})Hours"
         }
       end
       render :text => @sent_data.to_json

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:new_employee, :create_employee]
   access_control [:new_employee,:create_employee]  => 'organization'
 
-  # render new.rhtml
+  
   def new
     @user = User.new
   end

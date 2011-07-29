@@ -202,4 +202,15 @@ a{
   text-decoration:underline;
   color:#999999;
 }
+input[type=submit]{
+  margin: 5px;
+  background: Black;
+  padding:5px;
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 32px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
 

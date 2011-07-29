@@ -1,7 +1,11 @@
 class RegistrantsController < ApplicationController
 
   before_filter :login_required, :set_registrant
-  #access_control :DEFAULT => 'organization'
+  access_control :jobs_history => "( admin | registrant | admin )",
+    [:profile, :create_personal_data, :create_skill, :create_preference,
+    :create_pay, :create_credential, :create_location, :remove_location,
+    :upload_asset ] => "( organization | registrant )"
+
 
   def profile
     if request.xhr? && params[:link].present?

@@ -1,5 +1,7 @@
 class SchedulersController < ApplicationController
   before_filter :login_required, :set_scheduler
+  access_control :jobs_history => "( admin | organization | scheduler ) ",
+    [:profile, :create_profile_data] => "( organization | scheduler )"
 
   def profile
     @resource = @scheduler.profile_data.present? ? @scheduler.profile_data : ProfileData.new

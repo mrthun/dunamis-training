@@ -1,7 +1,11 @@
 class ClientsController < ApplicationController
   before_filter :login_required
   before_filter :set_client, :except => [:list, :new, :create ]
-  #access_control :DEFAULT => ['scheduler','admin','organization']
+  access_control :jobs_history => '( admin | organization | scheduler )',
+    [:list, :new, :create, :show, :create_basic_data,
+    :create_addresses, :create_billing,
+    :create_location, :remove_location] => "scheduler"
+  
 
   def list
     @clients = User.clients

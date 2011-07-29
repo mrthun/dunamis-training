@@ -1,8 +1,10 @@
 class OrganizationsController < ApplicationController
 
-  before_filter :login_required, :only => [:list, :reports]
-  access_control [:list, :all_reports, :new, :create, :change_status] => 'admin'
-  access_control :reports => 'organization'
+  before_filter :login_required
+  access_control [:reports,:dashboard] => "organization",
+    [:list, :new, :create, :change_status,
+    :delete_organization, :all_reports ] => "admin",
+    [:statistics, :history ] => "( admin | organization )"
 
 
   def list

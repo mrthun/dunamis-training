@@ -1,6 +1,7 @@
 <h1>Edit Timesheet</h1>
+
 <%= error_messages_for :timesheet %>
-<%= form_for :timesheet, @timesheet, :url => update_sheet_timesheets_path(:id => @timesheet.id ), :html => {:multipart  => true } do |f| -%>
+<%= form_for :timesheet, @timesheet, :url => update_sheet_timesheets_path(:id => @timesheet.id ), :html => {:multipart  => true,:id => "timesheettForm"  } do |f| -%>
   <%= render :partial => "form", :locals => { :f => f } %>
-  <p><%= submit_tag 'Update' %></p>
+  <p><%= submit_tag 'Update',:class=>"timesheet_submit" %></p>
 <% end -%>

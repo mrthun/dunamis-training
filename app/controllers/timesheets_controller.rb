@@ -11,11 +11,23 @@ class TimesheetsController < ApplicationController
     else
       @timesheets = Timesheet.all
     end
+  
   end
-
-  def details
+ def ajax_list
     set_active_tab("timecards")
+    if current_user.is_registrant?
+      @timesheets = current_user.timesheets_of
+    else
+      @timesheets = Timesheet.all
+    end
+    render  :partial=>"list",   :layout => false
+  end
+  def details
+     set_active_tab("timecards")
     @timesheet = Timesheet.find_by_id(params[:id])
+    render :partial=>"details"
+ 
+
   end
   
   def new
@@ -96,7 +108,10 @@ class TimesheetsController < ApplicationController
       @saturday = @timesheet.timesheet_entries.detect{|e| e.day == "saturday"}
       @saturday.update_attributes(params[:saturday])
       flash[:notice] = "Timesheet was updated."
-      redirect_to :action => :list
+       @timesheet = Timesheet.find_by_id(params[:id])
+     # redirect_to :action => :list
+       render :partial=>"myedit"
+    
     else
       flash[:notice] = "Timesheet was not updated."
       @sunday = @timesheet.timesheet_entries.detect{|e| e.day == "sunday"}
@@ -115,7 +130,18 @@ class TimesheetsController < ApplicationController
     @timesheet = Timesheet.find_by_id(params[:id])
     @timesheet.destroy
     flash[:notice]  = "Timesheet was deleted."
-    redirect_to :action => :list
+    redirect_to :action => :list 
   end
-
+def myedit
+    set_active_tab("timecards")
+    @timesheet = Timesheet.find_by_id(params[:id])
+    @sunday = @timesheet.timesheet_entries.detect{|e| e.day == "sunday"}
+    @monday = @timesheet.timesheet_entries.detect{|e| e.day == "monday"}
+    @teusday = @timesheet.timesheet_entries.detect{|e| e.day == "teusday"}
+    @wednesday = @timesheet.timesheet_entries.detect{|e| e.day == "wednesday"}
+    @thursday = @timesheet.timesheet_entries.detect{|e| e.day == "thursday"}
+    @friday = @timesheet.timesheet_entries.detect{|e| e.day == "friday"}
+    @saturday = @timesheet.timesheet_entries.detect{|e| e.day == "saturday"}
+    render :partial=>"myedit"
+  end
 end

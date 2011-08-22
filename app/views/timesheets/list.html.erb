@@ -1,5 +1,6 @@
 <br /><%= link_to "Add New Timesheet", new_timesheets_path %><br /><br />
 <h1>Timesheets</h1>
+<div id="list">
 <% unless @timesheets.blank? %>
   <table>
     <tr>
@@ -12,7 +13,8 @@
       <th>Actions</th>
     </tr>
     <% @timesheets.each do |sheet| %>
-      <tr>
+     
+    <tr style="cursor: pointer;" onclick="details('<%=sheet.id%>');">
         <td><%= sheet.client.display_name %></td>
         <td><%= sheet.registrant.display_name %></td>
         <td><%= sheet.facility %></td>
@@ -20,7 +22,11 @@
         <td><%= sheet.end_of_week.strftime("%d/%m/%Y") %></td>
         <td><%= sheet.total_hours %></td>
         <td>
-          <%= link_to 'View Details', details_timesheets_path(:id => sheet.id ) %> |
+          
+      
+
+
+          <%= link_to 'View_Details', details_timesheets_path(:id => sheet.id ) %> |
           <% unless current_user.is_registrant? %>
             <%= link_to 'Edit', edit_timesheets_path(:id => sheet.id) %> |
             <%= link_to 'Delete', delete_timesheets_path(:id => sheet.id) %>
@@ -34,3 +40,49 @@
 <%else%>
   Sorry! No TimeSheet listed yet.<br />
 <%end%>
+ </div>
+ <div id="details_content"> </div>
+  <div id="edit"> </div>
+ 
+
+<script type="text/javascript">
+     function details(id) {
+      var container = $("#details_content");
+
+    $.ajax({
+      url: '/timesheets/details?id='+id,
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+     myedit(id);
+      return false;
+
+   }
+       function myedit(id) {
+
+
+      var container = $("#edit");
+
+    $.ajax({
+      url: '/timesheets/myedit?id='+id,
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+
+
+
+   }
+
+
+
+
+
+</script>

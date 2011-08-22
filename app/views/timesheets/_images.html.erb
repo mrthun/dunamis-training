@@ -1,6 +1,8 @@
 <h2>Timesheet Images</h2>
+<%unless @timesheet.blank? %>
 <% unless @timesheet.timesheet_images.blank? %>
   <% @timesheet.timesheet_images.each do |img| %>
     <%= image_tag(img.image.url(:thumb) )%><br />
   <%end%>
+<%end%>
 <%end%>

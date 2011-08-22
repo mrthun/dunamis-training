@@ -98,8 +98,72 @@
 
 
 <script type="text/javascript">
-  $(document).ready(function() {
+    
 
+$(".timesheet_submit").click(function(){
+      $.post($("form#timesheettForm").attr("action"), $("form#timesheettForm").serialize(), function(response){
+        if(response.success){
+          $("#edit").html(response.html);
+        }
+      }, "html");
+      id = <%= @timesheet.id %>;
+       details(id);
+       myedit(id);
+       load_updated_list();
+      return false;
+    });
+function details(id) {
+      var container = $("#details_content");
+
+    $.ajax({
+      url: '/timesheets/details?id='+id,
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+     myedit(id);
+      return false;
+
+   }
+       function myedit(id) {
+
+
+      var container = $("#edit");
+
+    $.ajax({
+      url: '/timesheets/myedit?id='+id,
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+
+
+
+   }
+function load_updated_list() {
+
+
+      var container = $("#list");
+
+    $.ajax({
+      url: '/timesheets/ajax_list',
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+
+
+
+   }
     $("#add_another").click(function(){
       $('#file').append(function() {
         return "<div id='file'><input id='images_' name='images[]' type='file'><br></div>";
@@ -149,5 +213,5 @@
       return parseInt(hours)+":"+parseInt(minuts);
     }
 
-  });
+
 </script>

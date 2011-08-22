@@ -1,3 +1,4 @@
+<%unless @timesheet.blank?%>
 <h1>Timesheet Details</h1><br />
 Client: <%= @timesheet.client.display_name %><br /><br />
 Registrant: <%= @timesheet.registrant.display_name %><br /><br />
@@ -36,10 +37,5 @@ Total Hours: <%= @timesheet.total_hours %><br /><br />
 <%end%>
 <br /><br />
 
-<% unless current_user.is_registrant? %>
-  <%=
-  link_to 'Edit', edit_timesheets_path(:id => @timesheet.id) %> |
-  <%= link_to 'Delete', delete_timesheets_path(:id => @timesheet.id) %>
-<%else%>
-  <%= link_to 'Edit', edit_timesheets_path(:id => @timesheet.id) if current_user.timesheets_of.include?(@timesheet)%>
-<%  end %>
+
+<%end%>

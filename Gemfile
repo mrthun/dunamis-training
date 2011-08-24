@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'annotate'
 gem 'friendly_id'
 gem 'paperclip'
+gem 'rake', '0.8.7'
 
 # Use unicorn as the web server
 # gem 'unicorn'

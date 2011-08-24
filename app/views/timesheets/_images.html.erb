@@ -3,9 +3,14 @@
 <%unless @timesheet.blank? %>
 <% unless @timesheet.timesheet_images.blank? %>
   <% @timesheet.timesheet_images.each do |img| %>
-  <tr onclick="load_selected_image('<%=img.id%>')" >
-   <td> <%= image_tag(img.image.url(:thumb) )%></td>
-    
+  <tr style="cursor: pointer;" onclick="load_selected_image('<%=img.id%>')" >
+   <td> 
+     <%#= image_tag(img.image.url(:thumb) )%>
+   </td>
+
+   <td> <%= img.image_file_name%>
+   </td>
+
     </tr>
   
   <%end%>

@@ -83,13 +83,13 @@
 
 
 <h2>Timesheet Images</h2>
-<p>
-  <% unless @timesheet.timesheet_images.blank? %>
-    <% @timesheet.timesheet_images.each do |img| %>
-      <%= image_tag(img.image.url(:thumb))%>
-    <%end%>
-  <%end%>
-</p>
+<%#*<p>%>
+  <%# unless @timesheet.timesheet_images.blank? %>
+    <%# @timesheet.timesheet_images.each do |img| %>
+      <%#= image_tag(img.image.url(:thumb))%>
+    <%#end%>
+  <%#end%>
+<%#*</p>%>
 <div id="resume">
 
 </div>
@@ -100,6 +100,7 @@
 
 
 <script type="text/javascript">
+  
  $('#images_').change(function(){
      
     $('#imageForm').ajaxSubmit({
@@ -127,26 +128,18 @@ $(".timesheet_submit").click(function(){
         }
       }, "html");
       id = <%= @timesheet.id %>;
+      
        details(id);
-       myedit(id);
-       load_images(id)
-       load_updated_list();
+      
       return false;
     });
 function details(id) {
-      var container = $("#details_content");
-
-    $.ajax({
-      url: '/timesheets/details?id='+id,
-      type: 'get',
-      dataType: 'html',
-      processData: false,
-      success: function(data) {
-      container.html(data);
-      }
-    });
+        
      myedit(id);
-     load_images(id)
+     load_images(id);
+     var trid ="#timesheet_"+id;
+     $('table#newCandidatesTable tr').attr("style","background-color: white;cursor: pointer;");
+     $(trid).attr("style","background-color: #1E90FF;");
       return false;
 
    }
@@ -164,14 +157,14 @@ function details(id) {
       container.html(data);
       }
     });
-
+ 
 
 
    }
 function load_updated_list() {
 
 
-      var container = $("#list");
+     var container = $("#list");
 
     $.ajax({
       url: '/timesheets/ajax_list',

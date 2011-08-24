@@ -1,5 +1,5 @@
 <% unless @timesheets.blank? %>
-  <table>
+  <table id="newCandidatesTable" style="background-color: white;">
     <tr>
       <th>Client</th>
       <th>Registrant</th>
@@ -7,11 +7,11 @@
       <th>Status</th>
       <th>Date(end of week)</th>
       <th>Total Hours</th>
-      <th>Actions</th>
+      <%#*<th>Actions</th>%>
     </tr>
     <% @timesheets.each do |sheet| %>
      
-    <tr style="cursor: pointer;" onclick="details('<%=sheet.id%>');">
+    <tr id="timesheet_<%=sheet.id%>" style="cursor: pointer;" onclick="details('<%=sheet.id%>');">
         <td><%= sheet.client.display_name %></td>
         <td><%= sheet.registrant.display_name %></td>
         <td><%= sheet.facility %></td>

@@ -1,14 +1,30 @@
 <br /><%= link_to "Add New Timesheet", new_timesheets_path %><br /><br />
- <div id="details_content" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 100px; margin-left: 4px;float:left; "> </div>
- <div id="edit" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 400px; margin-left: 4px;float:left"> </div>
- <div id="images" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 400px; margin-left: 4px;float:left"> </div>
- <div id="selectedimage" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 400px; margin-left: 4px;float:left"> </div>
- 
-<h1>Timesheets</h1
+ <h1>Timesheets</h1>
+<div>
 
-<div id="list" style="OVERFLOW: auto; WIDTH: 300px; HEIGHT: 20px; margin-left: 4px;">
+<div  style="OVERFLOW: auto;border: thin solid #000000; vertical-align:top; margin-top:2px;WIDTH: 45%;
+HEIGHT:500px;float:left;">
+
+  <div id="selectedimage"> </div>
+ 
+</div>
+       <div  style="OVERFLOW: auto;border: thin solid #000000; vertical-align:top; margin-top:2px;WIDTH: 45%;
+         HEIGHT:500px;float:left;">
+         <div id="edit"> </div> 
+     </div>
+         <div  style="OVERFLOW: auto;border: thin solid #000000; vertical-align:top; margin-top:5px;WIDTH: 35%;
+HEIGHT:100px;float:left;">
+           <div id="images" > </div>
+     </div>
+      <div  style="OVERFLOW: auto;border: thin solid #000000; vertical-align:top; margin-top:5px;WIDTH: 55%;
+HEIGHT:100px;float:left;">
+     
+
+
+
+<div id="list">
 <% unless @timesheets.blank? %>
-  <table>
+  <table id="newCandidatesTable" style="background-color: white;" >
     <tr>
       <th>Client</th>
       <th>Registrant</th>
@@ -16,11 +32,11 @@
       <th>Status</th>
       <th>Date(end of week)</th>
       <th>Total Hours</th>
-      <th>Actions</th>
+      <%#*<th>Actions</th>%>
     </tr>
     <% @timesheets.each do |sheet| %>
      
-    <tr style="cursor: pointer;" onclick="details('<%=sheet.id%>');">
+    <tr id="timesheet_<%=sheet.id%>" style="cursor: pointer;" onclick="details('<%=sheet.id%>');">
         <td><%= sheet.client.display_name %></td>
         <td><%= sheet.registrant.display_name %></td>
         <td><%= sheet.facility %></td>
@@ -32,13 +48,13 @@
       
 
 
-          <%= link_to 'View_Details', details_timesheets_path(:id => sheet.id ) %> |
-          <% unless current_user.is_registrant? %>
-            <%= link_to 'Edit', edit_timesheets_path(:id => sheet.id) %> |
-            <%= link_to 'Delete', delete_timesheets_path(:id => sheet.id) %>
-          <%else%>
-            <%= link_to 'Edit', edit_timesheets_path(:id => sheet.id) if current_user.timesheets_of.include?(sheet)%>
-          <%  end %>
+          <%#= link_to 'View_Details', details_timesheets_path(:id => sheet.id ) %> 
+          <%# unless current_user.is_registrant? %>
+            <%#= link_to 'Edit', edit_timesheets_path(:id => sheet.id) %> 
+            <%#= link_to 'Delete', delete_timesheets_path(:id => sheet.id) %>
+          <%#else%>
+            <%#= link_to 'Edit', edit_timesheets_path(:id => sheet.id) if current_user.timesheets_of.include?(sheet)%>
+          <%#  end %>
         </td>
       </tr>
     <%end%>
@@ -47,25 +63,21 @@
   Sorry! No TimeSheet listed yet.<br />
 <%end%>
  </div>
+<%#*<div id="details_content" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 100px; margin-left: 4px;float:left; "> </div>%>
+</div>
 
- 
-
+</div>
 <script type="text/javascript">
-     function details(id) {
-      var container = $("#details_content");
+  
 
-    $.ajax({
-      url: '/timesheets/details?id='+id,
-      type: 'get',
-      dataType: 'html',
-      processData: false,
-      success: function(data) {
-      container.html(data);
-      }
-    });
+   function details(id) {
+     
      myedit(id);
-     load_images(id)
-      return false;
+     load_images(id);
+     var trid ="#timesheet_"+id;
+     $('table#newCandidatesTable tr').attr("style","background-color: white;cursor: pointer;");
+     $(trid).attr("style","background-color: #1E90FF;cursor: pointer;");
+            return false;
 
    }
        function myedit(id) {

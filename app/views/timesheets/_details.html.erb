@@ -29,12 +29,16 @@ Status: <%= @timesheet.status %><br /><br />
 <br />
 Total Hours: <%= @timesheet.total_hours %><br /><br />
 
-<h2>Timesheet Images</h2>
-<% unless @timesheet.timesheet_images.blank? %>
-  <% @timesheet.timesheet_images.each do |img| %>
-    <%= image_tag(img.image.url(:thumb))%>
-  <%end%>
-<%end%>
+<%#*<h2>Timesheet Images</h2>%>
+
+<%# unless @timesheet.timesheet_images.blank? %>
+  <%# @timesheet.timesheet_images.each do |img| %>
+ 
+    <%#= image_tag(img.image.url(:thumb))%>
+  
+   
+  <%#end%>
+<%#end%>
 <br /><br />
 
 

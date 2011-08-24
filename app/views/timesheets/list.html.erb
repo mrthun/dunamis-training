@@ -1,6 +1,12 @@
 <br /><%= link_to "Add New Timesheet", new_timesheets_path %><br /><br />
-<h1>Timesheets</h1>
-<div id="list">
+ <div id="details_content" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 100px; margin-left: 4px;float:left; "> </div>
+ <div id="edit" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 400px; margin-left: 4px;float:left"> </div>
+ <div id="images" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 400px; margin-left: 4px;float:left"> </div>
+ <div id="selectedimage" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 400px; margin-left: 4px;float:left"> </div>
+ 
+<h1>Timesheets</h1
+
+<div id="list" style="OVERFLOW: auto; WIDTH: 300px; HEIGHT: 20px; margin-left: 4px;">
 <% unless @timesheets.blank? %>
   <table>
     <tr>
@@ -41,8 +47,7 @@
   Sorry! No TimeSheet listed yet.<br />
 <%end%>
  </div>
- <div id="details_content"> </div>
-  <div id="edit"> </div>
+
  
 
 <script type="text/javascript">
@@ -59,6 +64,7 @@
       }
     });
      myedit(id);
+     load_images(id)
       return false;
 
    }
@@ -80,8 +86,42 @@
 
 
    }
+function load_images(id) {
 
 
+      var container = $("#images");
+
+    $.ajax({
+      url: '/timesheets/load_timesheet_images?id='+id,
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+
+
+
+   }
+function load_selected_image(id) {
+
+
+      var container = $("#selectedimage");
+
+    $.ajax({
+      url: '/timesheets/load_selected_image?id='+id,
+      type: 'get',
+      dataType: 'html',
+      processData: false,
+      success: function(data) {
+      container.html(data);
+      }
+    });
+
+
+
+   }
 
 
 

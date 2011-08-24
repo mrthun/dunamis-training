@@ -144,4 +144,20 @@ def myedit
     @saturday = @timesheet.timesheet_entries.detect{|e| e.day == "saturday"}
     render :partial=>"myedit"
   end
+   def upload_timesheet_images
+      
+    @timesheet = Timesheet.find_by_id(params[:id])
+    params[:images].each{ |image| @timesheet.timesheet_images.create!(:image => image ) } if params[:images].present?
+    render :partial=>"details"
+
+
+  end
+  def load_timesheet_images
+    @timesheet = Timesheet.find_by_id(params[:id])
+    render :partial=>"images"
+  end
+ def load_selected_image
+    @img = TimesheetImage.find_by_id(params[:id])
+    render :partial=>"selectedimage"
+  end
 end

@@ -67,8 +67,8 @@ Training::Application.routes.draw do
 
   resource :timesheets do
     collection do
-      get "list","details","delete"
-      post "update_sheet"
+      get "list","details","delete","myedit","ajax_list","load_timesheet_images","load_selected_image"
+      post "update_sheet","upload_timesheet_images"
       
       #      get 'details/:id', :to  => "jobs#details", :as => :details
       #      get 'update_job/:id/:days/:key', :to  => "jobs#update_job", :as => :update_job

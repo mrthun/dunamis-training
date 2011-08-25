@@ -129,17 +129,20 @@ $(".timesheet_submit").click(function(){
       }, "html");
       id = <%= @timesheet.id %>;
       
-       details(id);
+       load_updated_list(id);
+      
+     
       
       return false;
     });
 function details(id) {
-        
+    
      myedit(id);
      load_images(id);
      var trid ="#timesheet_"+id;
      $('table#newCandidatesTable tr').attr("style","background-color: white;cursor: pointer;");
      $(trid).attr("style","background-color: #1E90FF;");
+     $('#heading').attr("style","background-color: grey;");
       return false;
 
    }
@@ -153,15 +156,16 @@ function details(id) {
       type: 'get',
       dataType: 'html',
       processData: false,
+       start:progress(container),
       success: function(data) {
       container.html(data);
       }
     });
- 
+   
 
 
    }
-function load_updated_list() {
+function load_updated_list(id) {
 
 
      var container = $("#list");
@@ -173,10 +177,18 @@ function load_updated_list() {
       processData: false,
       success: function(data) {
       container.html(data);
+        details(id);
       }
     });
+       
+    
 
 
+   }
+    function progress(container)
+   {
+
+       container.html('<html> <head></head> <body><img src="/images/progress.gif" alt="Ruby Demo" /> </body></html>');
 
    }
 function load_images(id) {
@@ -189,6 +201,7 @@ function load_images(id) {
       type: 'get',
       dataType: 'html',
       processData: false,
+      start:progress(container),
       success: function(data) {
       container.html(data);
       }

@@ -25,7 +25,7 @@ HEIGHT:100px;float:left;">
 <div id="list">
 <% unless @timesheets.blank? %>
   <table id="newCandidatesTable" style="background-color: white;" >
-    <tr>
+    <tr id="heading" style="background-color: grey;">
       <th>Client</th>
       <th>Registrant</th>
       <th>Facility</th>
@@ -65,8 +65,20 @@ HEIGHT:100px;float:left;">
  </div>
 <%#*<div id="details_content" style="OVERFLOW: auto; WIDTH: 500px; HEIGHT: 100px; margin-left: 4px;float:left; "> </div>%>
 </div>
-
 </div>
+ //////////////////////////////
+  <div class="shadow"></div>
+  <div id="imagepopup">
+  <div class="close" onclick="hide_lightbox();" >x</div>
+<div id="image_container">
+ 
+</div>
+  <INPUT TYPE="BUTTON" VALUE="Select" ONCLICK="">
+  <INPUT TYPE="BUTTON" VALUE="Cancel" ONCLICK="hide_lightbox();">
+  </div>
+  
+<INPUT TYPE="BUTTON" VALUE="Select" ONCLICK="show_lightbox();">
+ /////////////////////////////
 <script type="text/javascript">
   
 
@@ -77,6 +89,7 @@ HEIGHT:100px;float:left;">
      var trid ="#timesheet_"+id;
      $('table#newCandidatesTable tr').attr("style","background-color: white;cursor: pointer;");
      $(trid).attr("style","background-color: #1E90FF;cursor: pointer;");
+     $('#heading').attr("style","background-color: grey;");
             return false;
 
    }
@@ -90,11 +103,20 @@ HEIGHT:100px;float:left;">
       type: 'get',
       dataType: 'html',
       processData: false,
-      success: function(data) {
+      start:progress(container),
+     success: function(data) {
       container.html(data);
       }
     });
 
+
+
+   }
+   function progress(container)
+   {
+
+      
+      container.html('<html> <head></head> <body><img src="/images/progress.gif" alt="Ruby Demo" /> </body></html>')
 
 
    }
@@ -108,8 +130,10 @@ function load_images(id) {
       type: 'get',
       dataType: 'html',
       processData: false,
+      start:progress(container),
       success: function(data) {
       container.html(data);
+        $("#image_container").html(data);
       }
     });
 
@@ -126,15 +150,28 @@ function load_selected_image(id) {
       type: 'get',
       dataType: 'html',
       processData: false,
+      start:progress(container),
       success: function(data) {
       container.html(data);
+    
       }
     });
 
 
 
    }
+ function show_lightbox(){
 
+        $(".shadow").show();
+        $("#imagepopup").show();
+      }
+
+
+      function hide_lightbox(){
+
+        $(".shadow").hide();
+        $("#imagepopup").hide();
+      }
 
 
 </script>

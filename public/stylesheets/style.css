@@ -234,3 +234,35 @@ input[type=submit]{
 .datahighlight {
  background-color: white;
 }
+.shadow {
+/*    background: none repeat scroll 0 0 #000000;*/
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0.6;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display:none;
+}
+#imagepopup{
+    left: 50%;
+    margin-left: -226px;
+    position: fixed;
+    top: 9%;
+    width: 457px;
+    z-index: 999;
+    width: 402px;
+    display:none;
+    border: double white;
+    background-color: #1E90FF;
+    
+}
+.close{
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+}
